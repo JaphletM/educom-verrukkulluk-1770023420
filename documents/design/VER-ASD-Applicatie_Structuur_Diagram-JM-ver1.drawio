@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="FFfxofU8MKA8d-tIKrJ2" name="Page-1">
-        <mxGraphModel dx="2215" dy="2680" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1353" dy="2092" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -165,6 +165,9 @@
                         <mxGeometry x="380" y="-110" width="120" height="60" as="geometry"/>
                     </mxCell>
                 </UserObject>
+                <mxCell id="286" value="" style="edgeStyle=elbowEdgeStyle;html=1;elbow=horizontal;startArrow=none;endArrow=none;" edge="1" parent="1" source="32" target="27">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
                 <UserObject label="Artikel Ophalen&amp;nbsp;" treeRoot="1" id="32">
                     <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};" vertex="1" parent="1">
                         <mxGeometry x="570" y="-220" width="120" height="60" as="geometry"/>
@@ -432,11 +435,6 @@
                         <mxGeometry x="370" y="70" width="120" height="60" as="geometry"/>
                     </mxCell>
                 </UserObject>
-                <UserObject label="Waardering ophalen" treeRoot="1" id="261">
-                    <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};" vertex="1" parent="1">
-                        <mxGeometry x="370" y="150" width="120" height="60" as="geometry"/>
-                    </mxCell>
-                </UserObject>
                 <UserObject label="Favoriet ophalen" treeRoot="1" id="262">
                     <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};" vertex="1" parent="1">
                         <mxGeometry x="370" y="240" width="120" height="60" as="geometry"/>
@@ -449,7 +447,7 @@
                 </UserObject>
                 <UserObject label="User Ophalen" treeRoot="1" id="265">
                     <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};" vertex="1" parent="1">
-                        <mxGeometry x="770" y="-100" width="120" height="60" as="geometry"/>
+                        <mxGeometry x="840" y="-100" width="120" height="60" as="geometry"/>
                     </mxCell>
                 </UserObject>
                 <mxCell id="266" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="25" target="27">
@@ -482,10 +480,10 @@
                         <mxPoint x="570" y="-190.91" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="271" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="261">
+                <mxCell id="271" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="310" y="-165" as="sourcePoint"/>
-                        <mxPoint x="380" y="125" as="targetPoint"/>
+                        <mxPoint x="370" y="180" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="272" value="" style="endArrow=classic;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1">
@@ -500,10 +498,10 @@
                         <mxPoint x="580" y="-80.91" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="277" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1">
+                <mxCell id="277" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="265">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="690" y="-70.91" as="sourcePoint"/>
-                        <mxPoint x="770" y="-70.91" as="targetPoint"/>
+                        <mxPoint x="830" y="-71" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <UserObject label="Keuken Type Ophalen&amp;nbsp;" treeRoot="1" id="280">
@@ -516,8 +514,8 @@
                         <mxPoint x="870" y="440" as="sourcePoint"/>
                         <mxPoint x="290" y="390" as="targetPoint"/>
                         <Array as="points">
-                            <mxPoint x="830" y="-44"/>
-                            <mxPoint x="830" y="390"/>
+                            <mxPoint x="900" y="-44"/>
+                            <mxPoint x="900" y="390"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
@@ -526,6 +524,61 @@
                         <mxGeometry x="170" y="360" width="120" height="60" as="geometry"/>
                     </mxCell>
                 </UserObject>
+                <UserObject label="Prijs berekenen" treeRoot="1" id="285">
+                    <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};" vertex="1" parent="1">
+                        <mxGeometry x="780" y="-320" width="120" height="60" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="288" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.012;entryY=0.893;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="285">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="690" y="-190.56" as="sourcePoint"/>
+                        <mxPoint x="770" y="-190.56" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <UserObject label="Calorieen totaal berereken" treeRoot="1" id="289">
+                    <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};" vertex="1" parent="1">
+                        <mxGeometry x="780" y="-230" width="120" height="60" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="290" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="32" target="289">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="700" y="-180.56" as="sourcePoint"/>
+                        <mxPoint x="791" y="-256" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <UserObject label="Waardering ophalen" treeRoot="1" id="291">
+                    <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};" vertex="1" parent="1">
+                        <mxGeometry x="370" y="150" width="120" height="60" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="Gemiddelde waardering berekenen&amp;nbsp;" treeRoot="1" id="292">
+                    <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};" vertex="1" parent="1">
+                        <mxGeometry x="570" y="160" width="120" height="60" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="293" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="490" y="190" as="sourcePoint"/>
+                        <mxPoint x="570" y="190" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <UserObject label="Sterretjes toevoegen" treeRoot="1" id="294">
+                    <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};" vertex="1" parent="1">
+                        <mxGeometry x="760" y="160" width="120" height="60" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="297" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="690" y="189.44" as="sourcePoint"/>
+                        <mxPoint x="760" y="189" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="298" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="24" target="25">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="310" y="-180" as="sourcePoint"/>
+                        <mxPoint x="390" y="-180" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
             </root>
         </mxGraphModel>
     </diagram>
