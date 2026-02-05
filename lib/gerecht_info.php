@@ -12,6 +12,27 @@ class gerecht_info {
             
             return($gerecht_info);
         }
+
+        public function selecteerInfoMetUser($gerecht_id){
+
+    $sql = "
+        SELECT *
+        FROM gerecht_info
+        LEFT JOIN `user`
+            ON user.id = gerecht_info.user_id
+        WHERE gerecht_info.gerecht_id = $gerecht_id
+          AND gerecht_info.record_type IN ('O','F')
+    ";
+
+    $result = mysqli_query($this->connection, $sql);
+
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+
+    return $rows;
+}
     
 
     public function addFavorite($gerecht_id, $user_id){
