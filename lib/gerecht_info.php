@@ -40,4 +40,17 @@ class gerecht_info {
 
     return mysqli_query($this->connection, $insertSql);
 }
+
+
+public function deleteFavorite($gerecht_id, $user_id){
+
+    $sql = "
+        DELETE FROM gerecht_info
+        WHERE record_type = 'F'
+        AND gerecht_id = $gerecht_id
+        AND user_id = $user_id
+    ";
+
+    return mysqli_query($this->connection, $sql);
+}
 }
