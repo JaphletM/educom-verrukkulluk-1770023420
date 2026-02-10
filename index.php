@@ -3,45 +3,25 @@
 require_once("lib/database.php");
 require_once("lib/user.php");
 require_once("lib/ingredient.php");
-require_once("lib/keuken_type.php");
 require_once("lib/artikel.php");
 require_once("lib/gerecht_info.php");
-require_once("lib/gerecht.php");
+
 
 
 /// INIT
 $db = new database();
-$user = new user($db->getConnection());
-$art=new artikel($db->getConnection());
-$keuken=new keuken_type($db->getConnection());
-$ingr=new ingredient($db->getConnection());
-$gi = new gerecht_info($db->getConnection());
-$g=new gerecht($db->getConnection());
-$ug=new gerecht ($db->getConnection());
 
+$ingr=new ingredient($db->getConnection());
+
+$inf=new gerecht_info($db->getConnection());
 
 
 /// VERWERK 
-$userdata = $user->selecteerUser(2);
-$keukendata = $keuken->selecteerKeukenType(2);
-$artikeldata=$art->selecteerArtikel(2);
-$ingredientdata=$ingr->selecteerIngredient(2);
-$favoriteDeleted=$gi->deleteFavorite(12, 1);
-$gerechtdata=$ug->selecteerGerecht(1);
+$ingredientdata=$ingr->selecteerIngredient(1);
+$gerechtinfodata=$inf->selecteerInfo(1);
 
 
 /// RETURN
-var_dump($userdata);
-    echo"<br>";
-var_dump($keukendata);
-    echo"<br>";
-var_dump($artikeldata);
-    echo"<br>";
-var_dump($ingredientdata);
-    echo"<br>";
-var_dump($favoriteDeleted);
-
-var_dump($gerechtcalorieren);
-echo "<br>";    
-var_dump($gerechtdata);
-echo "<br>";
+echo"<pre>";
+///var_dump($ingredientdata);
+var_dump($gerechtinfodata);
