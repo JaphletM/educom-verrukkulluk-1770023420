@@ -36,9 +36,8 @@ class gerecht {
 
             $return[]=[
                 "id"=> $row["id"],
-                "keuken_id"=>$keuken["id"],
-                "keuken_type"=>$keuken["omschrijving"],
-                "gerecht_type"=>$type["omschrijving"],
+                "keuken_type"=>$keuken["omschrijving"]??null,
+                "gerecht_type"=>$type["omschrijving"]??null,
                 "user_id"=>$user["id"],
                 "usernaam"=>$user["naam"],
                 "datum_toegevoegd"=>$row["datum_toegevoegd"],
@@ -64,7 +63,7 @@ class gerecht {
     
     private function selecteerIngredient($gerecht_id){
         
-    return $this->ingredient->selecteerIngredient($gerecht_id);
+    return $this->ingredients->selecteerIngredient($gerecht_id);
 
     }
 

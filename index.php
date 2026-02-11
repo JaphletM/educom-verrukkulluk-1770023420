@@ -24,7 +24,7 @@ $gerecht=new gerecht($db->getConnection());
 /// VERWERK 
 $ingredientdata=$ingr->selecteerIngredient(1);
 $gerechtinfodata=$inf->selecteerInfo(1,"B");
-$gerechtdata=$gerecht->selecteerGerecht("1");
+$gerechtdata=$gerecht->selecteerGerecht();
 
 
 
