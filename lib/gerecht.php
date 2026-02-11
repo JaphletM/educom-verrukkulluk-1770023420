@@ -15,8 +15,12 @@ class gerecht {
         $this ->keuken=new keuken_type($connection);
     }
 
-    public function selecteerGerecht($gerecht_id){
+    public function selecteerGerecht($gerecht_id=null){
+        if($gerecht_id!==null){
         $sql="SELECT * from gerecht WHERE id=$gerecht_id ";
+        } else{
+            $sql= "SELECT* FROM gerecht";
+        }
 
         $return=[];
 
