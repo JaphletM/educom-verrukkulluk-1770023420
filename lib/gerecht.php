@@ -2,7 +2,7 @@
 class gerecht {
     private $connection;
     private $user;
-    private $ingredient;
+    private $ingredients;
     private $infor;
 
     private $keuken;
@@ -10,7 +10,7 @@ class gerecht {
     public function __construct($connection){
         $this->connection=$connection;
         $this->user=new user($connection);
-        $this->ingredient=new ingredient($connection);
+        $this->ingredients=new ingredient($connection);
         $this->infor=new gerecht_info($connection);
         $this ->keuken=new keuken_type($connection);
     }
@@ -26,6 +26,8 @@ class gerecht {
             $user=$this->selecteerUser($row["user_id"]);
             $keuken=$this->selectKitchen($row["keuken_id"],"K");
             $type=$this->selectType($row["type_id"],"T");
+            $ingredients=$this->selecteerIngredient($row["id"]);
+            
 
 
             $return[]=[
@@ -39,8 +41,9 @@ class gerecht {
                 "korte omschrijving"=>$row["korte_omschrijving"],
                 "lange omschrijving"=>$row["lange_omschrijving"],
                 "afbeelding"=>$row["afbeelding"],
-                "aantal calorieen"=>$this->calCalories($row["id"]),
-                "totaal prijs"=> $this->calcPrijs($row["id"]),
+                "ingredients"=>$ingredients,
+                "aantal calorieen"=>$this->calCalories($ingredients),
+                "totaal prijs"=> $this->calcPrijs($ingredients),
                 "steps" => $this->selectSteps($row["id"]),
                 "ratings" => $this->selectRatings($row["id"]),
                 "comments" => $this->selectRemarks($row["id"]),
@@ -61,9 +64,8 @@ class gerecht {
 
     }
 
-    private function calCalories($gerecht_id){
-        $ingredients=$this->selecteerIngredient($gerecht_id);
-
+    private function calCalories($ingredients){
+        
         $totalCalories=0;
 
         foreach($ingredients as $ingredient){
@@ -76,8 +78,7 @@ class gerecht {
 
     }
 
-    private function calcPrijs($gerecht_id){
-        $ingredients= $this->selecteerIngredient($gerecht_id);
+    private function calcPrijs($ingredients){
 
         $totalPrijs= 0;
 
