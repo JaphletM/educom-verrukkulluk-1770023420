@@ -9,7 +9,7 @@ class gerecht_info{
     }
 
 public function selecteerInfo($gerecht_id, $record_type){
-    $sql="select * from gerecht_info where gerecht_id=$gerecht_id AND record_type=$record_type";
+    $sql="SELECT * FROM gerecht_info WHERE gerecht_id=$gerecht_id AND record_type='$record_type'";
 
     $return=[];
 

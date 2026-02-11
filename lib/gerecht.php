@@ -23,7 +23,28 @@ class gerecht {
         $result=mysqli_query($this->connection,$sql);
 
         while ($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
-            $return[]=$row;
+            $user=$this->selecteerUser($row["user_id"]);
+            $keuken=$this->selectKitchen($row["keuken_id"],"K");
+            $type=$this->selectType($row["type_id"],"T");
+
+
+            $return[]=[
+                "id"=> $row["id"],
+                "keuken_id"=>$keuken["id"],
+                "keuken_type"=>$keuken["omschrijving"],
+                "gerecht_type"=>$type["omschrijving"],
+                "user_id"=>$user["id"],
+                "usernaam"=>$user["naam"],
+                "datum_toegevoegd"=>$row["datum_toegevoegd"],
+                "korte omschrijving"=>$row["korte_omschrijving"],
+                "lange omschrijving"=>$row["lange_omschrijving"],
+                "afbeelding"=>$row["afbeelding"],
+                "aantal calorieen"=>$this->calCalories($row["id"]),
+                "totaal prijs"=> $this->calcPrijs($row["id"]),
+                "steps" => $this->selectSteps($row["id"]),
+                "ratings" => $this->selectRatings($row["id"]),
+                "comments" => $this->selectRemarks($row["id"]),
+            ];
         }
         return $return;
     }
@@ -49,9 +70,9 @@ class gerecht {
             $aantal=$ingredient["aantal"];
             $calorie=$ingredient["calorie"];
 
-            $totalCalories+=($aantal*$calorie);
+            $totalCalories+= ($aantal*$calorie);
         }
-        return $totalCalories;
+        return (int) $totalCalories . " calorieen";
 
     }
 
@@ -63,24 +84,35 @@ class gerecht {
         foreach($ingredients as $ingredient){
             $aantal=$ingredient["aantal"];
             $prijs=$ingredient["prijs"];
+            $verpakking=$ingredient["verpakking"];
 
-            $totalPrijs+=($aantal*$prijs);
+            $totalPrijs+=($aantal/$verpakking)*$prijs;
         }
-        return $totalPrijs/100 ;
+        return "€".round($totalPrijs/100,2) ;
 
     }
 
-    private function selectRating($gerecht_id){
+    private function selectRatings($gerecht_id){
         $infor=$this->infor->selecteerInfo($gerecht_id,"W");
 
         $ratings=[];
 
         foreach ($infor as $info){
-                $ratings[]=$info["nummeriekveld"];
+            $user=$this->selecteerUser($info["user_id"]);
+                $ratings[]=[
+                    "user_id"=> $info["user_id"],
+                    "usernaam"=>$user["naam"],
+                    "rating"=> $info["nummeriekveld"]
+                ];
         }
 
     return $ratings;    
 
+    }
+
+    private function selectRemarks($gerecht_id){
+        return $this->infor->selecteerInfo($gerecht_id,"O");
+    
     }
 
     private function selectSteps($gerecht_id){
@@ -90,7 +122,7 @@ class gerecht {
         
         foreach ($infor as $info){
             $steps[]=[
-                "nummer"=> $info["nummeriekveld"],
+                "stap"=> $info["nummeriekveld"],
                 "instructie"=> $info["tekstveld"],
             ];
         }
@@ -98,29 +130,27 @@ class gerecht {
     }
 
 
-    private function selectKitchen($keuken_id, $record_type){
+    private function selectKitchen($keuken_id,$record_type){
 
-    return $this->keuken->selecteerKeukenType($keuken_id, ["K"]);
+    return $this->keuken->selecteerKeukenType($keuken_id,$record_type);
  
     }
 
-    private function selectType($keuken_id,$record_type){
+    private function selectType($type_id,$record_type){
 
-        return $this->keuken->selecteerKeukenType($keuken_id, ["T"]);
+        return $this->keuken->selecteerKeukenType($type_id,$record_type);
     }
 
     private function determineFavorite($user_id,$gerecht_id){
-        $info=$this->infor->selecteerInfo($gerecht_id,["F"]);
+        $info=$this->infor->selecteerInfo($gerecht_id,"F");
 
         foreach ($info as $row){
-            if($row["record_type"]=="F"&& $row["user_id"]==$user_id){
+            if($row["user_id"]==$user_id){
                 return true;
-            
-            } else {
-                return false;
-            }
+            } 
+                
         }
-
+        return false;
     }
 }
 

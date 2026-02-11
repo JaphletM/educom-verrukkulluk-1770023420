@@ -28,6 +28,7 @@ class ingredient{
                 "aantal"=>$row["aantal"],
                 "artikel_id"=>$artikel["id"],
                 "naam"=>$artikel["naam"],
+                "prijs"=> $artikel["prijs"],
                 "calorie"=>$artikel["calorie"],
                 "eenheid"=>$artikel["eenheid"],
                 "verpakking"=>$artikel["verpakking"]
