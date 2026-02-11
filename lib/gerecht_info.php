@@ -8,17 +8,17 @@ class gerecht_info{
         $this->user=new user($connection);
     }
 
-public function selecteerInfo($gerecht_id){
-    $sql="select * from gerecht_info where gerecht_id=$gerecht_id";
+public function selecteerInfo($gerecht_id, $record_type){
+    $sql="select * from gerecht_info where gerecht_id=$gerecht_id AND record_type=$record_type";
 
     $return=[];
 
     $result=mysqli_query($this->connection,$sql);
     
     while ($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
-        $user=$this->selecteerUser($row["user_id"]);
 
         if($row["record_type"]=="O"||$row["record_type"]=="F" ){
+            $user=$this->selecteerUser($row["user_id"]);
 
             $return[]= [
             "id"=>$row["id"],
@@ -33,12 +33,12 @@ public function selecteerInfo($gerecht_id){
             "nummeriekveld"=>($row["nummeriekveld"]),
             "tekstveld"=>($row["tekstveld"]),
             
-        ];
+             ];
            
         }else{
         $return[]= $row;
-        }
     }
+}
     return $return;
 }
 
@@ -52,19 +52,19 @@ private function addFavorite($user_id,$gerecht_id){
     ('$user_id','$gerecht_id','F')"; 
 
     $result =mysqli_query($this->connection,$sql);
-    $favorited=mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-    return($favorited);
+    return($result);
 }
 
 private function deleteFavorite($user_id,$gerecht_id){
      $sql= "DELETE FROM gerecht_info WHERE user_id=$user_id AND gerecht_id=$gerecht_id AND record_type='F'";
 
     $result =mysqli_query($this->connection,$sql);
-    $unfavorited=mysqli_fetch_array($result,MYSQLI_ASSOC);
+    
+    return($result);
+    }
+}
 
-    return($unfavorited);
-}
-}
+
 
 ?>

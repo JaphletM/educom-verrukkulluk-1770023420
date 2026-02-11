@@ -72,3 +72,15 @@ php composer require twig/twig
 ### Project
 Dit "skeleton" project is een eenvoudige instructie hoe je met twig kunt werken. 
 Kijk voor meer informatie en uitgebreide documentatie op de [twig site](https://twig.symfony.com)
+
+## Mijn Notities
+### ERD diagram 
+<img src= "documents/design/ERD-ver-v1.png.webp"/>
+
+Dit Entity Relationship Diagram is in 5de normaal vorm. Dit kun je merken aan de entity(tabel) GerechtInfo en KeukenType. Door het gebruik van keuken type dinges kun je meerdere tabellen in 1 mega tabel zetten en zo minder tabellen in je database hebben. Dit is efficienter om mee te coderen. 
+
+
+Na het creeren van een ERD heb ik de ASD applicatie structuur diagram gemaakt. Dit laat zien hoe de flow van informatie is gegaan. 
+
+
+

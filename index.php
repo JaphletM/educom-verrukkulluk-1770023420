@@ -16,12 +16,15 @@ $ingr=new ingredient($db->getConnection());
 $inf=new gerecht_info($db->getConnection());
 
 
+
 /// VERWERK 
 $ingredientdata=$ingr->selecteerIngredient(1);
-$gerechtinfodata=$inf->selecteerInfo(1);
+$gerechtinfodata=$inf->selecteerInfo(1,"B");
+
 
 
 /// RETURN
 echo"<pre>";
-///var_dump($ingredientdata);
-var_dump($gerechtinfodata);
+var_dump($ingredientdata);
+//var_dump($gerechtinfodata);
+
