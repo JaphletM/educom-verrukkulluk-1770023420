@@ -6,9 +6,9 @@ public function __construct($connection){
 
 }
 
-public function selecteerKeukenType($keuken_type_id){
+public function selecteerKeukenType($keuken_id,$record_type){
 
-$sql="select * from keuken_type where id=$keuken_type_id";
+$sql="SELECT * from keuken_type WHERE id=$keuken_id AND record_type =$record_type";
 
 $result = mysqli_query($this->connection,$sql);
 $keuken_type=mysqli_fetch_array($result,MYSQLI_ASSOC);

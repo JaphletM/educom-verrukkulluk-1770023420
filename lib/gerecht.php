@@ -3,17 +3,20 @@ class gerecht {
     private $connection;
     private $user;
     private $ingredient;
-    private $info;
+    private $infor;
+
+    private $keuken;
 
     public function __construct($connection){
         $this->connection=$connection;
         $this->user=new user($connection);
         $this->ingredient=new ingredient($connection);
-        $this->info=new gerecht_info($connection);
+        $this->infor=new gerecht_info($connection);
+        $this ->keuken=new keuken_type($connection);
     }
 
     public function selecteerGerecht($gerecht_id){
-        $sql="SELECT * from gerecht WHERE gerecht_id=$gerecht_id ";
+        $sql="SELECT * from gerecht WHERE id=$gerecht_id ";
 
         $return=[];
 
@@ -63,16 +66,16 @@ class gerecht {
 
             $totalPrijs+=($aantal*$prijs);
         }
-        return $totalPrijs;
+        return $totalPrijs/100 ;
 
     }
 
     private function selectRating($gerecht_id){
-        $informatie=$this->selecteerInfo($gerecht_id,"B");
+        $infor=$this->infor->selecteerInfo($gerecht_id,"W");
 
         $ratings=[];
 
-        foreach ($informatie as $info){
+        foreach ($infor as $info){
                 $ratings[]=$info["nummeriekveld"];
         }
 
@@ -81,8 +84,44 @@ class gerecht {
     }
 
     private function selectSteps($gerecht_id){
+        $infor= $this->infor->selecteerInfo($gerecht_id,"B");
 
-    
+        $steps=[];
+        
+        foreach ($infor as $info){
+            $steps[]=[
+                "nummer"=> $info["nummeriekveld"],
+                "instructie"=> $info["tekstveld"],
+            ];
+        }
+        return $steps;
+    }
 
+
+    private function selectKitchen($keuken_id, $record_type){
+
+    return $this->keuken->selecteerKeukenType($keuken_id, ["K"]);
+ 
+    }
+
+    private function selectType($keuken_id,$record_type){
+
+        return $this->keuken->selecteerKeukenType($keuken_id, ["T"]);
+    }
+
+    private function determineFavorite($user_id,$gerecht_id){
+        $info=$this->infor->selecteerInfo($gerecht_id,["F"]);
+
+        foreach ($info as $row){
+            if($row["record_type"]=="F"&& $row["user_id"]==$user_id){
+                return true;
+            
+            } else {
+                return false;
+            }
+        }
+
+    }
 }
+
 ?>
