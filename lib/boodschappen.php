@@ -28,20 +28,20 @@ class boodschappen
 
             $bestaat = $this->ArtikelOpLijst($artikel_id, $user_id);
 
-           
+
             if ($bestaat != false) {
                 $huidig = (int) $bestaat["aantal"];
             } else {
                 $huidig = 0;
             }
 
-           
+
             $oudePacks = (int) ceil($huidig / $verpakking);
             $nieuwePacks = (int) ceil(($huidig + $nodig) / $verpakking);
 
             $extraPacks = $nieuwePacks - $oudePacks;
             if ($extraPacks > 0) {
-            $totaalVerpakkingen += $extraPacks;
+                $totaalVerpakkingen += $extraPacks;
             }
 
             if ($bestaat = false) {
