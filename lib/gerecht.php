@@ -115,6 +115,7 @@ class gerecht {
     }
 
     private function selectRemarks($gerecht_id){
+
         return $this->infor->selecteerInfo($gerecht_id,"O");
     
     }
@@ -136,7 +137,7 @@ class gerecht {
 
     private function selectKitchen($keuken_id,$record_type){
 
-    return $this->keuken->selecteerKeukenType($keuken_id,$record_type);
+        return $this->keuken->selecteerKeukenType($keuken_id,$record_type);
  
     }
 
