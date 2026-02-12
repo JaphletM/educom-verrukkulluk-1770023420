@@ -23,6 +23,7 @@ class boodschappen {
         foreach($ingredienten as $ingredient){
             $artikel_id=$ingredient["artikel_id"];
             $aantal=$ingredient["aantal"];
+            
     
             $bestaat=$this->ArtikelOpLijst($artikel_id,$user_id);
 
@@ -51,16 +52,24 @@ class boodschappen {
     }
 
     private function ophalenBoodschappen($user_id){
-        $sql="SELECT * FROM boodschappen_lijst WHERE user_id=$user_id";
+        $sql="SELECT * FROM boodschappen_lijst 
+            WHERE user_id=$user_id";
 
         $return=[];
 
         $result=mysqli_query($this->connection,$sql);
-            while ($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
-               $return[]=$row;
-            };
-    
-        return $return;
+        while ($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
+
+        
+        $ingredient = $this->ingredients->selecteerIngredient($row["artikel_id"]);
+        $verpakking = $ingredient["verpakking"];
+
+        $row["packages"] = ceil($row["aantal"] / $verpakking);
+
+        $return[]=$row;
+    };
+
+    return $return;
     }
 
     private function ophalenIngredienten($gerecht_id){
@@ -71,28 +80,29 @@ class boodschappen {
 
 
     private function artikelToevoegen($artikel_id,$user_id,$aantal){
-        $sql="INSERT INTO boodschappen_lijst (user_id, artikel_id, aantal) VALUES ('$user_id','$artikel_id','$aantal')";
+
+        
+
+        $sql="INSERT INTO boodschappen_lijst (user_id, artikel_id, aantal) 
+            VALUES ('$user_id','$artikel_id','$aantal')";
 
        
-         $result = mysqli_query($this->connection, $sql);
-    if(!$result){
-        die("INSERT error: ".mysqli_error($this->connection)."<br>QUERY: ".$sql);
+        $result = mysqli_query($this->connection, $sql);
+    
+        return $result;
+
     }
+
+    private function artikelBijwerken($artikel_id,$user_id,$extraAantal){
+         $sql = "UPDATE boodschappen_lijst 
+            SET aantal = aantal + $extraAantal 
+            WHERE artikel_id = $artikel_id 
+            AND user_id = $user_id";
+
+    $result = mysqli_query($this->connection,$sql);
+    
     return $result;
-
-    }
-
-    private function artikelBijwerken($artikel_id,$user_id,$toevoegAantal){
-        $sql= "UPDATE boodschappen_lijst SET aantal= aantal+ $toevoegAantal WHERE artikel_id=$artikel_id AND user_id=$user_id";
-
-       $result=mysqli_query($this->connection,$sql);
-        
-       return $result;
-       $result = mysqli_query($this->connection, $sql);
-    if(!$result){
-        die("INSERT error: ".mysqli_error($this->connection)."<br>QUERY: ".$sql);
-    }
-    return $result;
+ 
 
     }
 }
