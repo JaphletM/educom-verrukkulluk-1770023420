@@ -44,10 +44,12 @@ class boodschappen
                 $totaalVerpakkingen += $extraPacks;
             }
 
+            $nieuweAantal=$huidig+$nodig;
+
             if ($bestaat = false) {
-                $this->artikelToevoegen($artikel_id, $user_id, $nodig);
+                $this->artikelToevoegen($artikel_id, $user_id, $nieuweAantal);
             } else {
-                $this->artikelBijwerken($artikel_id, $user_id, $nodig);
+                $this->artikelBijwerken($artikel_id, $user_id, $nieuweAantal);
             }
         }
 
@@ -110,10 +112,10 @@ class boodschappen
 
     }
 
-    private function artikelBijwerken($artikel_id, $user_id, $extraAantal)
+    private function artikelBijwerken($artikel_id, $user_id, $nieuweAantal)
     {
         $sql = "UPDATE boodschappen_lijst 
-            SET aantal = aantal + $extraAantal 
+            SET aantal = $nieuweAantal
             WHERE artikel_id = $artikel_id 
             AND user_id = $user_id";
 
