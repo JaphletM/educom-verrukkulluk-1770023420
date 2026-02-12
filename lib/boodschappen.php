@@ -17,39 +17,41 @@ class boodschappen
 
     public function boodschappenToevoegen($gerecht_id, $user_id)
     {
-
         $ingredienten = $this->ophalenIngredienten($gerecht_id);
-
 
         $totaalVerpakkingen = 0;
 
-
         foreach ($ingredienten as $ingredient) {
-            $artikel_id = $ingredient["artikel_id"];
-            $nodig = $ingredient["aantal"];
-            $verpakking = $ingredient["verpakking"];
-
+            $artikel_id = (int) $ingredient["artikel_id"];
+            $nodig = (int) $ingredient["aantal"];
+            $verpakking = (int) $ingredient["verpakking"];
 
             $bestaat = $this->ArtikelOpLijst($artikel_id, $user_id);
 
+           
             if ($bestaat != false) {
                 $huidig = (int) $bestaat["aantal"];
-                $this->artikelBijwerken($artikel_id, $user_id, $nodig);
             } else {
                 $huidig = 0;
-                $this->artikelToevoegen($artikel_id, $user_id, $nodig);
             }
 
+           
             $oudePacks = (int) ceil($huidig / $verpakking);
             $nieuwePacks = (int) ceil(($huidig + $nodig) / $verpakking);
 
-            $extraPacks = max($nieuwePacks - $oudePacks, 0);
+            $extraPacks = $nieuwePacks - $oudePacks;
+            if ($extraPacks > 0) {
             $totaalVerpakkingen += $extraPacks;
+            }
 
+            if ($bestaat = false) {
+                $this->artikelToevoegen($artikel_id, $user_id, $nodig);
+            } else {
+                $this->artikelBijwerken($artikel_id, $user_id, $nodig);
+            }
         }
 
         return true;
-
     }
 
 
