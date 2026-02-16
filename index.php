@@ -13,7 +13,7 @@ require_once("lib/boodschappen.php");
 /// Twig koppelen:
 $loader = new \Twig\Loader\FilesystemLoader("./templates");
 /// VOOR PRODUCTIE:
-/// $twig = new \Twig\Environment($loader), ["cache" => "./cache/cc"]);
+///$twig = new \Twig\Environment($loader), ["cache" => "./cache/cc"]);
 
 /// VOOR DEVELOPMENT:
 $twig = new \Twig\Environment($loader, ["debug" => true ]);
