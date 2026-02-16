@@ -19,15 +19,14 @@ class boodschappen
     {
         $ingredienten = $this->ophalenIngredienten($gerecht_id);
 
-        $totaalVerpakkingen = 0;
-
         foreach ($ingredienten as $ingredient) {
             $artikel_id = (int) $ingredient["artikel_id"];
             $nodig = (int) $ingredient["aantal"];
             $verpakking = (int) $ingredient["verpakking"];
 
-            $bestaat = $this->ArtikelOpLijst($artikel_id, $user_id);
 
+            $bestaat = $this->ArtikelOpLijst($artikel_id, $user_id);
+         
 
             if ($bestaat != false) {
                 $huidig = (int) $bestaat["aantal"];
@@ -35,21 +34,13 @@ class boodschappen
                 $huidig = 0;
             }
 
-
-            $oudePacks = (int) ceil($huidig / $verpakking);
             $nieuwePacks = (int) ceil(($huidig + $nodig) / $verpakking);
 
-            $extraPacks = $nieuwePacks - $oudePacks;
-            if ($extraPacks > 0) {
-                $totaalVerpakkingen += $extraPacks;
-            }
 
-            $nieuweAantal=$huidig+$nodig;
-
-            if ($bestaat = false) {
-                $this->artikelToevoegen($artikel_id, $user_id, $nieuweAantal);
+            if ($bestaat === false) {
+                $this->artikelToevoegen($artikel_id, $user_id, $nodig, $nieuwePacks);
             } else {
-                $this->artikelBijwerken($artikel_id, $user_id, $nieuweAantal);
+                $this->artikelBijwerken($artikel_id, $user_id, $nodig, $nieuwePacks);
             }
         }
 
@@ -63,13 +54,15 @@ class boodschappen
     {
         $boodschappen = $this->ophalenBoodschappen($user_id);
 
+
         foreach ($boodschappen as $boodschap) {
-            if ($boodschap["artikel_id"] === $artikel_id) {
+            if ($boodschap["artikel_id"] == $artikel_id) {
                 return $boodschap;
 
             }
         }
         return false;
+
     }
 
     private function ophalenBoodschappen($user_id)
@@ -84,7 +77,6 @@ class boodschappen
 
             $return[] = $row;
         }
-        ;
 
         return $return;
     }
@@ -97,13 +89,12 @@ class boodschappen
     }
 
 
-    private function artikelToevoegen($artikel_id, $user_id, $aantal)
+    private function artikelToevoegen($artikel_id, $user_id, $aantal, $aantalverpakkingen)
     {
 
 
-
-        $sql = "INSERT INTO boodschappen_lijst (user_id, artikel_id, aantal) 
-            VALUES ('$user_id','$artikel_id','$aantal')";
+        $sql = "INSERT INTO boodschappen_lijst (user_id, artikel_id, aantal, aantal_verpakkingen) 
+            VALUES ('$user_id','$artikel_id','$aantal','$aantalverpakkingen')";
 
 
         $result = mysqli_query($this->connection, $sql);
@@ -112,11 +103,12 @@ class boodschappen
 
     }
 
-    private function artikelBijwerken($artikel_id, $user_id, $nieuweAantal)
+    private function artikelBijwerken($artikel_id, $user_id, $extraAantal, $aantalverpakkingen)
     {
         $sql = "UPDATE boodschappen_lijst 
-            SET aantal = $nieuweAantal
-            WHERE artikel_id = $artikel_id 
+            SET aantal = aantal+$extraAantal, 
+            aantal_verpakkingen= $aantalverpakkingen
+            WHERE artikel_id = $artikel_id
             AND user_id = $user_id";
 
         $result = mysqli_query($this->connection, $sql);

@@ -25,6 +25,8 @@ $bood= new boodschappen($db->getConnection());
 
 $boodschapdata=$bood->boodschappenToevoegen(1,1);
 
+var_dump($boodschapdata);
+
 echo "done";
 
 
