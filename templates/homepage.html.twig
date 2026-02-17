@@ -18,38 +18,40 @@
     <h4>Dit is de template {{  title }}</h4>
 
 
-
-
     
+<h4>Dit is de template {{ title }}</h4>
 
-{# Loop #}
-    <ul>
+  <ul>
     {% for record in data %}
-        <li>
-            <img src="{{ record.afbeelding }}" style="width: 100px; height: 100px;">
+      <li style="margin-bottom: 20px;">
 
-            {{ record.title }}
-            {# sub-loop #}
-            <ul>
-                {% for ingr in record.ingredients %}
-                    <li>
-                        <span {% if ingr.id < 2 %}style='color: #F00'{% endif %}>{{  ingr.naam }}</span>
+        {% if record.afbeelding %}
+          <img src="{{ record.afbeelding }}" style="width: 100px; height: 100px;" alt="gerecht">
+        {% endif %}
 
-                        {# if #}
-                        {%  if ingr.id == 3 %}
-                            <strong>Dit is ID 3!</strong>
-                        {%  endif  %}
-                    </li>
-                {% endfor %}
-            </ul>
-        </li>
+        <strong>{{ record.keuken_type }} • {{ record.gerecht_type }}</strong><br>
+        <em>Door {{ record.username }} ({{ record.datum_toegevoegd }})</em><br>
+
+        <p>{{ attribute(record, 'korte omschrijving') }}</p>
+
+        {# sub-loop: ingredients #}
+        <ul>
+          {% for ingr in record.ingredients %}
+            <li>
+              {{ ingr.naam }} — aantal: {{ ingr.aantal }}
+            </li>
+          {% endfor %}
+        </ul>
+
+        <a href="index.php?action=detail&gerecht_id={{ record.id }}">Bekijk detail</a>
+
+      </li>
+    {% else %}
+      <li>Geen gerechten gevonden.</li>
     {% endfor %}
-    <ul>
-     {# Dump #}
-       <pre>
-        {{ dump(data) }}
-       </pre>
+  </ul>
 
-     
+  {# Dump (tijdelijk, mag later weg) #}
+  <pre>{{ dump(data) }}</pre>
 
 {% endblock %}
