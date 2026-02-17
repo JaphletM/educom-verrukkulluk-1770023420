@@ -32,10 +32,12 @@
 /** HEADING **/
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--heading) !important;
+    
 }
 
 h1 {
     font-size: 52px;
+    text-align: center;
 }
 
 h2 {
@@ -56,15 +58,15 @@ html, body {
 
 .green-block {
     background-color: var(--lighter-green);
-    color: var(--white);
+    color: var(--black) !important;
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
+    margin-top:40px;
 
 }
 
-.green-block h2 {
-    color: var(--white);
+.green-block img {
     margin-bottom: 15px;
     text-align:center;
 }
@@ -89,9 +91,65 @@ html, body {
     font-size: 14px;
     color: var(--white);
 }
+
+.main-img{
+    display: block;
+    margin: 0 auto;
+}
 .contact-block img {
     width: 200px;
     height: auto;
+}
+
+.login-card{
+  background: #b01818;
+  padding: 30px;
+  border-radius: 10px;
+  color: white;
+}
+
+.login-card label{
+  margin-top: 10px;
+  display: block;
+}
+
+.fake-input{
+  background: white;
+  height: 35px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.login-btn{
+  background: #f2a11a;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  border-radius: 25px;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.hero-header {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.hero-logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 180px;
+    z-index: 2;
 }
 .footer{ 
  background-color:var(--darker-orange);
