@@ -38,6 +38,7 @@ class gerecht {
                 "id"=> $row["id"],
                 "keuken_type"=>$keuken["omschrijving"]??null,
                 "gerecht_type"=>$type["omschrijving"]??null,
+                "gerecht_titel"=>$row["titel"],
                 "user_id"=>$user["id"],
                 "usernaam"=>$user["naam"],
                 "datum_toegevoegd"=>$row["datum_toegevoegd"],

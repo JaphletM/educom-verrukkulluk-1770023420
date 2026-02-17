@@ -58,7 +58,7 @@ html, body {
 
 .green-block {
     background-color: var(--lighter-green);
-    color: var(--black) !important;
+    color: var(--black);
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -153,4 +153,39 @@ html, body {
 }
 .footer{ 
  background-color:var(--darker-orange);
+}
+.recipe-box{
+    background: var(--kahki);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-top:40px;
+
+}
+
+.recipe-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.recipe-box h2{
+    color:var(--lighter-green);
+    
+}
+
+.smullen-btn {
+    background-color: #b01818;
+    color: white;
+    text-decoration: none;
+    padding: 5px 15px;
+    border-radius: 50px;
+    display: inline-block;
+    font-weight: bold;
+    transition: 0.2s ease;
+}
+
+.smullen-btn:hover {
+    background: #a31616;     
 }

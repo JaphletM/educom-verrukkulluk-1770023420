@@ -11,34 +11,22 @@
 
 {# nu de block content op in de main pagina vullen #}
 {% block content %}
-    {# Dit is commentaar #}
-
-
-    {# Print #}
-    <h1>Heading #1</h1>
-    <h2>Heading #2</h2>
-    <h3>Heading #3 t/m 5</h3>
-
-    <h4>Dit is de template {{  title }}</h4>
-
-
-    
-<h4>Dit is de template {{ title }}</h4>
-
   <ul>
     {% for record in data %}
-      <div style="margin-bottom: 20px;">
+    <div class="recipe-grid">
+    <div class="recipe-box">
 
         {% if record.afbeelding %}
-          <img src="{{ record.afbeelding }}" style="width: 100px; height: 100px;" alt="gerecht">
+          <img src="{{ record.afbeelding }}" class="main-img" alt="gerecht">
         {% endif %}
 
+        <h2> {{record.gerecht_titel}}</h2>
         <strong>{{ record.keuken_type }} • {{ record.gerecht_type }}</strong><br>
         <em>Door {{ record.usernaam}} ({{ record.datum_toegevoegd }})</em><br>
 
         <p>{{ attribute(record, 'korte omschrijving') }}</p>
 
-        {# sub-loop: ingredients #}
+         {# sub-loop: ingredients #}
         <div>
           {% for ingr in record.ingredients %}
             <li>
@@ -47,13 +35,26 @@
           {% endfor %}
         </div>
 
+        <a href="#" class="smullen-btn">
+            <h2>Smullen!</h2>
+        </a>
+        <img src="assets/img/46424798-euro-teken-icoon-aan-wit-achtergrond-vector.jpg" width="20px">
+        <img src="assets/img/istockphoto-993103334-612x612.jpg" width="20px">
+        <img src="assets/img/vuur.png" width="20px">
+
+
+        </div>
+    </div>
+
+       
     </div>
     {% else %}
       <li>Geen gerechten gevonden.</li>
     {% endfor %}
   </ul>
-
+ 
   {# Dump  #}
   <pre>{{ dump(data) }}</pre>
+ 
 
 {% endblock %}
