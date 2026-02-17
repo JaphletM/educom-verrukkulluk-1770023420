@@ -10,6 +10,7 @@
 {% block content %}
     {# Dit is commentaar #}
 
+
     {# Print #}
     <h1>Heading #1</h1>
     <h2>Heading #2</h2>
@@ -23,35 +24,33 @@
 
   <ul>
     {% for record in data %}
-      <li style="margin-bottom: 20px;">
+      <div style="margin-bottom: 20px;">
 
         {% if record.afbeelding %}
           <img src="{{ record.afbeelding }}" style="width: 100px; height: 100px;" alt="gerecht">
         {% endif %}
 
         <strong>{{ record.keuken_type }} • {{ record.gerecht_type }}</strong><br>
-        <em>Door {{ record.username }} ({{ record.datum_toegevoegd }})</em><br>
+        <em>Door {{ record.usernaam}} ({{ record.datum_toegevoegd }})</em><br>
 
         <p>{{ attribute(record, 'korte omschrijving') }}</p>
 
         {# sub-loop: ingredients #}
-        <ul>
+        <div>
           {% for ingr in record.ingredients %}
             <li>
-              {{ ingr.naam }} — aantal: {{ ingr.aantal }}
+              {{ ingr.naam }} 
             </li>
           {% endfor %}
-        </ul>
+        </div>
 
-        <a href="index.php?action=detail&gerecht_id={{ record.id }}">Bekijk detail</a>
-
-      </li>
+    </div>
     {% else %}
       <li>Geen gerechten gevonden.</li>
     {% endfor %}
   </ul>
 
-  {# Dump (tijdelijk, mag later weg) #}
+  {# Dump  #}
   <pre>{{ dump(data) }}</pre>
 
 {% endblock %}

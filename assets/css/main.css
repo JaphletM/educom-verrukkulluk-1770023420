@@ -54,8 +54,45 @@ html, body {
     font-size: 16px;
 }
 
-.footer {
-    background-color: var(--darker-orange);
+.green-block {
+    background-color: var(--lighter-green);
     color: var(--white);
     padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+
+}
+
+.green-block h2 {
+    color: var(--white);
+    margin-bottom: 15px;
+    text-align:center;
+}
+
+.green-block .item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.green-block .icon {
+    font-size: 20px;
+}
+
+.logo img{
+    width:100px;
+    height: auto;
+
+}
+.contact-text {
+    margin-top: 5px;
+    font-size: 14px;
+    color: var(--white);
+}
+.contact-block img {
+    width: 200px;
+    height: auto;
+}
+.footer{ 
+ background-color:var(--darker-orange);
 }
