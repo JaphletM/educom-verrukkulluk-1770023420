@@ -93,7 +93,7 @@ class gerecht {
 
             $totalPrijs+=($aantal/$verpakking)*$prijs;
         }
-        return "€".round($totalPrijs/100,2) ;
+        return round($totalPrijs/100,2) ;
 
     }
 
