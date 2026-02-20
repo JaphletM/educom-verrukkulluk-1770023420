@@ -25,13 +25,9 @@
 
       <p>{{ attribute(record, 'korte omschrijving') }}</p>
 
-      <ul class="ingredienten">
-        {% for ingr in record.ingredients %}
-          <li>{{ ingr.naam }}</li>
-        {% endfor %}
-      </ul>
+     
 <div class="recipe-footer">
-      <a href="#" class="smullen-btn">
+      <a href="index.php?action=detail&gerecht_id={{ record.id }}" class="smullen-btn">
         <h3>Smullen!</h3>
     </a>
 </div>
@@ -42,12 +38,18 @@
 
         <img src="assets/img/vuur.png" width="20">
         {{ attribute(record, 'aantal calorieen') }}
+
+        <img src="assets/img/istockphoto-993103334-612x612.jpg" width="20">
+        4
       </div>
+
 
     </div>
   {% else %}
     <p>Geen gerechten gevonden.</p>
   {% endfor %}
+
+
 </div>
 
 {% endblock %}

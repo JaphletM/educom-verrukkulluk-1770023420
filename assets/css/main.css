@@ -198,3 +198,30 @@ html, body {
 .smullen-btn:hover {
     background: #a31616;     
 }
+
+.kaart {
+    background-color:var(--kahki);
+    color: black;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top:40px;
+  margin-bottom:40px;
+  align-items: center;
+  display: flex;  
+
+}
+.kaart-foto{
+    border-radius: 12px;
+    height: auto;
+    width: 200px;
+    height:220px;
+    object-fit: cover;
+    flex: 0 0 200px;
+     display: block; 
+
+
+}
+.kaart-content{
+    flex:1;
+}
+

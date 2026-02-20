@@ -15,8 +15,8 @@ class gerecht {
         $this ->keuken=new keuken_type($connection);
     }
 
-    public function selecteerGerecht($gerecht_id=null){
-        if($gerecht_id!==null){
+    public function selecteerGerecht($gerecht_id=0){
+        if($gerecht_id>0){
         $sql="SELECT * from gerecht WHERE id=$gerecht_id ";
         } else{
             $sql= "SELECT* FROM gerecht";
@@ -53,6 +53,10 @@ class gerecht {
                 "comments" => $this->selectRemarks($row["id"]),
             ];
         }
+       
+    if ($gerecht_id > 0) {
+        return $return[0] ?? null;   
+    }
         return $return;
     }
 
@@ -117,7 +121,18 @@ class gerecht {
 
     private function selectRemarks($gerecht_id){
 
-        return $this->infor->selecteerInfo($gerecht_id,"O");
+        $infor=$this->infor->selecteerInfo($gerecht_id,"O");
+        $comments=[];
+        
+        foreach ($infor as $info){
+            $comments[]=[
+                "user"=> $info["naam"],
+                "comment"=> $info["tekstveld"],
+                 "afbeelding"=> $info["afbeelding"]
+            ];
+        }
+        return $comments;
+
     
     }
 
@@ -129,7 +144,8 @@ class gerecht {
         foreach ($infor as $info){
             $steps[]=[
                 "stap"=> $info["nummeriekveld"],
-                "instructie"=> $info["tekstveld"],
+                "instructie"=> $info["tekstveld"]
+               
             ];
         }
         return $steps;

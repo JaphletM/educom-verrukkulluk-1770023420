@@ -1,6 +1,108 @@
 {% extends "main.html.twig" %}
 
 {% block header %}
-  <img src="assets/img/logo-v2.png" alt="Verrukkulluk logo" style="height:50px;">
+  <div class="hero-header">
+    <img src="assets/img/healthy-bowl-frische.jpg" class="hero-bg" alt="">
+    <img src="assets/img/logo-v2.png" class="hero-logo" alt="Logo">
+  </div>
+{% endblock %}
+
+{% block content %}
+
+<div class="kaart">
+
+  {% if data.afbeelding %}
+    <img src="{{ data.afbeelding }}" class="kaart-foto" alt="{{ data.gerecht_titel }}">
+  {% endif %}
+
+  <div class="kaart-content">
+
+    <div class="meta">
+      <img src="assets/img/46424798-euro-teken-icoon-aan-wit-achtergrond-vector.jpg" width="20">
+      {{ attribute(data, 'totaal prijs') }}
+
+      <img src="assets/img/vuur.png" width="20">
+      {{ attribute(data, 'aantal calorieen') }}
+
+      <img src="assets/img/istockphoto-993103334-612x612.jpg" width="20">
+      4
+    </div>
+
+    <h2 style="color:var(--lighter-green)">{{ data.gerecht_titel }}</h2>
+    <p>{{ attribute(data, 'lange omschrijving') }}</p>
+
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active"
+                data-bs-toggle="tab"
+                data-bs-target="#tab-ingredients"
+                type="button"
+                role="tab">
+          Ingrediënten
+      </a>
+      </li>
+
+      <li class="nav-item" role="presentation">
+        <a class="nav-link"
+                data-bs-toggle="tab"
+                data-bs-target="#tab-prep"
+                type="button"
+                role="tab">
+          Bereidingswijze
+      </a>
+      </li>
+    </ul>
+
+     <li class="nav-item" role="presentation">
+        <a class="nav-link"
+                data-bs-toggle="tab"
+                data-bs-target="#tab-comments"
+                type="button"
+                role="tab">
+          Opmerkingen
+      </a>
+      </li>
+    </ul>
+
+    <div class="tab-content pt-3">
+      <div class="tab-pane fade show active" id="tab-ingredients" role="tabpanel">
+        <ul>
+          {% for ingr in data.ingredients %}
+            <li>{{ ingr.naam }}</li>
+          {% else %}
+            <li>Geen ingrediënten gevonden.</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="tab-pane fade" id="tab-prep" role="tabpanel">
+        <ul>
+          {% for step in data.steps %}
+            <li>Stap {{ step.stap }}: {{ step.instructie }}</li>
+          {% else %}
+            <li>Geen stappen gevonden.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+     <div class="tab-pane fade" id="tab-comments" role="tabpanel">
+        <ul>
+          {% for comm in data.comments %}
+            <li>Stap {{ step.stap }}: {{ step.instructie }}</li>
+          {% else %}
+            <li>Geen stappen gevonden.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="fa fa-heart">
+
+    </div>
+  </div>
+</div>
+
 {% endblock %}
 

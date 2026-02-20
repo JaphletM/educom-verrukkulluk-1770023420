@@ -50,7 +50,9 @@ switch($action) {
             $data = $gerecht->selecteerGerecht($gerecht_id);
             $template = 'detail.html.twig';
             $title = "detail pagina";
+    
             break;
+
         }
 
         /// etc
