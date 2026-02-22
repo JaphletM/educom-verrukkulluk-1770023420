@@ -8,6 +8,11 @@
 {% endblock %}
 
 {% block content %}
+<p style="background:yellow; padding:10px;">
+  steps: {{ data.steps|length }} — comments: {{ data.comments|length }}
+</p>
+
+
 
 <div class="kaart">
 
@@ -31,36 +36,45 @@
     <h2 style="color:var(--lighter-green)">{{ data.gerecht_titel }}</h2>
     <p>{{ attribute(data, 'lange omschrijving') }}</p>
 
-    <ul class="nav nav-tabs" role="tablist">
+ 
+
+<a href="index.php?action=toggle_favorite&gerecht_id={{ data.id }}">
+
+<i class="fa fa-heart {% if data.is_favoriet %}fa fa-solid active{% else %}fa fa-regular{% endif %}"></i>
+</a>
+
+ </div>
+  
+ <ul class="nav nav-tabs" role="tablist">
       <li class="nav-item" role="presentation">
-        <a class="nav-link active"
+        <button class="nav-link active"
                 data-bs-toggle="tab"
                 data-bs-target="#tab-ingredients"
                 type="button"
                 role="tab">
           Ingrediënten
-      </a>
+      </button>
       </li>
 
       <li class="nav-item" role="presentation">
-        <a class="nav-link"
+        <button class="nav-link"
                 data-bs-toggle="tab"
                 data-bs-target="#tab-prep"
                 type="button"
                 role="tab">
           Bereidingswijze
-      </a>
+      </button>
       </li>
   
 
      <li class="nav-item" role="presentation">
-        <a class="nav-link"
+        <button class="nav-link"
                 data-bs-toggle="tab"
                 data-bs-target="#tab-comments"
                 type="button"
                 role="tab">
           Opmerkingen
-      </a>
+     </button>
       </li>
     </ul>
 
@@ -89,25 +103,17 @@
   <div class="tab-pane fade" id="tab-comments" role="tabpanel">
     <ul>
       {% for comm in data.comments %}
-        <li>{{ comm.user }}: {{ comm.opmerking }}</li>
+        <li>{{ comm.user }}: {{ comm.comment }}</li>
       {% else %}
         <li>Geen opmerkingen gevonden.</li>
       {% endfor %}
     </ul>
   </div>
 
-</div>
-
-
-<a href="index.php?action=toggle_favorite&gerecht_id={{ data.id }}">
-
-<i class="fa fa-heart {% if data.is_favoriet %}fa fa-solid active{% else %}fa fa-regular{% endif %}"></i>
-</a>
-
-
-    </div>
+ 
   </div>
 </div>
+
 
 {% endblock %}
 
