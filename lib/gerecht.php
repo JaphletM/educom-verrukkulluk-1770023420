@@ -51,6 +51,9 @@ class gerecht {
                 "steps" => $this->selectSteps($row["id"]),
                 "ratings" => $this->selectRatings($row["id"]),
                 "comments" => $this->selectRemarks($row["id"]),
+                'is_favoriet'=>$this->infor->determineFavorite(1, $row["id"])
+                
+
             ];
         }
        
@@ -163,7 +166,7 @@ class gerecht {
         return $this->keuken->selecteerKeukenType($type_id,$record_type);
     }
 
-    private function determineFavorite($user_id,$gerecht_id){
+   /*  private function determineFavorite($user_id,$gerecht_id){
         $info=$this->infor->selecteerInfo($gerecht_id,"F");
 
         foreach ($info as $row){
@@ -173,7 +176,8 @@ class gerecht {
                 
         }
         return false;
-    }
-}
+    }*/
+
+} 
 
 ?>

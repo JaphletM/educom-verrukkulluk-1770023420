@@ -225,3 +225,7 @@ html, body {
     flex:1;
 }
 
+.fa-heart.active {
+  color: red;
+}
+

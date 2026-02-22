@@ -42,10 +42,40 @@ public function selecteerInfo($gerecht_id, $record_type){
     return $return;
 }
 
+public function toggleFavorite($user_id, $gerecht_id){
+
+
+    if($this->determineFavorite($user_id, $gerecht_id)){
+        $this->deleteFavorite($user_id, $gerecht_id);
+        return false; 
+    } else {
+        $this->addFavorite($user_id, $gerecht_id);
+        return true; 
+    }
+}
+
+public function determineFavorite($user_id, $gerecht_id){
+ 
+    $sql = "SELECT 1
+            FROM gerecht_info
+            WHERE user_id = $user_id
+              AND gerecht_id = $gerecht_id
+              AND record_type = 'F'
+            LIMIT 1";
+
+    $result = mysqli_query($this->connection, $sql);
+
+    return ($result && mysqli_num_rows($result) > 0);
+}
+
 private function selecteerUser($user_id){
 
     return $this->user->selecteerUser($user_id);
 }
+
+
+
+
 
 private function addFavorite($user_id,$gerecht_id){
     $sql= "INSERT INTO gerecht_info (user_id, gerecht_id, record_type) VALUES

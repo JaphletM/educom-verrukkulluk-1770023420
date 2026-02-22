@@ -51,7 +51,7 @@
           Bereidingswijze
       </a>
       </li>
-    </ul>
+  
 
      <li class="nav-item" role="presentation">
         <a class="nav-link"
@@ -65,40 +65,45 @@
     </ul>
 
     <div class="tab-content pt-3">
-      <div class="tab-pane fade show active" id="tab-ingredients" role="tabpanel">
-        <ul>
-          {% for ingr in data.ingredients %}
-            <li>{{ ingr.naam }}</li>
-          {% else %}
-            <li>Geen ingrediënten gevonden.</li>
-          {% endfor %}
-        </ul>
-      </div>
 
-      <div class="tab-pane fade" id="tab-prep" role="tabpanel">
-        <ul>
-          {% for step in data.steps %}
-            <li>Stap {{ step.stap }}: {{ step.instructie }}</li>
-          {% else %}
-            <li>Geen stappen gevonden.</li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
+  <div class="tab-pane fade show active" id="tab-ingredients" role="tabpanel">
+    <ul>
+      {% for ingr in data.ingredients %}
+        <li>{{ ingr.naam }}</li>
+      {% else %}
+        <li>Geen ingrediënten gevonden.</li>
+      {% endfor %}
+    </ul>
+  </div>
 
-     <div class="tab-pane fade" id="tab-comments" role="tabpanel">
-        <ul>
-          {% for comm in data.comments %}
-            <li>Stap {{ step.stap }}: {{ step.instructie }}</li>
-          {% else %}
-            <li>Geen stappen gevonden.</li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
+  <div class="tab-pane fade" id="tab-prep" role="tabpanel">
+    <ul>
+      {% for step in data.steps %}
+        <li>Stap {{ step.stap }}: {{ step.instructie }}</li>
+      {% else %}
+        <li>Geen stappen gevonden.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="tab-pane fade" id="tab-comments" role="tabpanel">
+    <ul>
+      {% for comm in data.comments %}
+        <li>{{ comm.user }}: {{ comm.opmerking }}</li>
+      {% else %}
+        <li>Geen opmerkingen gevonden.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+</div>
 
 
-    <div class="fa fa-heart">
+<a href="index.php?action=toggle_favorite&gerecht_id={{ data.id }}">
+
+<i class="fa fa-heart {% if data.is_favoriet %}fa fa-solid active{% else %}fa fa-regular{% endif %}"></i>
+</a>
+
 
     </div>
   </div>

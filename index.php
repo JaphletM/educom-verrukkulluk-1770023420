@@ -25,6 +25,7 @@ $twig->addExtension(new \Twig\Extension\DebugExtension());
 require_once("lib/gerecht.php");
 $db = new database();
 $gerecht = new gerecht($db->getConnection());
+$info = new gerecht_info($db->getConnection());
 $data = $gerecht->selecteerGerecht();
 
 
@@ -54,6 +55,16 @@ switch($action) {
             break;
 
         }
+
+      case "toggle_favorite": {
+    $gerecht_id = (int)($_GET["gerecht_id"] ?? 0);
+
+    $info = new gerecht_info($db->getConnection());
+    $info->toggleFavorite(1, $gerecht_id);
+
+    header("Location: index.php?action=detail&gerecht_id=".$gerecht_id);
+    exit;
+}
 
         /// etc
 
