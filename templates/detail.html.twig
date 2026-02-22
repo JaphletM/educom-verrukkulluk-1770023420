@@ -8,10 +8,6 @@
 {% endblock %}
 
 {% block content %}
-<p style="background:yellow; padding:10px;">
-  steps: {{ data.steps|length }} — comments: {{ data.comments|length }}
-</p>
-
 
 
 <div class="kaart">
@@ -40,10 +36,15 @@
 
 <a href="index.php?action=toggle_favorite&gerecht_id={{ data.id }}">
 
-<i class="fa fa-heart {% if data.is_favoriet %}fa fa-solid active{% else %}fa fa-regular{% endif %}"></i>
-</a>
+<i class="fa fa-heart {% if data.is_favoriet %}fa fa-solid active{% else %}fa fa-regular{% endif %}">
 
- </div>
+</i>
+</a>
+  </div>
+ 
+</div>
+
+<div class="details-tab">
   
  <ul class="nav nav-tabs" role="tablist">
       <li class="nav-item" role="presentation">
@@ -110,10 +111,9 @@
     </ul>
   </div>
 
- 
-  </div>
 </div>
-
+</div>
+ 
 
 {% endblock %}
 

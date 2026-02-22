@@ -229,3 +229,9 @@ html, body {
   color: red;
 }
 
+.detail-tabs{
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+}
