@@ -16,7 +16,7 @@ $loader = new \Twig\Loader\FilesystemLoader("./templates");
 ///$twig = new \Twig\Environment($loader), ["cache" => "./cache/cc"]);
 
 /// VOOR DEVELOPMENT:
-$twig = new \Twig\Environment($loader, ["debug" => true ]);
+$twig = new \Twig\Environment($loader, ["debug" => true]);
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 
 /******************************/
@@ -27,6 +27,10 @@ $db = new database();
 $gerecht = new gerecht($db->getConnection());
 $info = new gerecht_info($db->getConnection());
 $data = $gerecht->selecteerGerecht();
+$boodschappen = new boodschappen($db->getConnection());
+
+
+
 
 
 /*
@@ -38,35 +42,55 @@ $gerecht_id = isset($_GET["gerecht_id"]) ? $_GET["gerecht_id"] : "";
 $action = isset($_GET["action"]) ? $_GET["action"] : "homepage";
 
 
-switch($action) {
 
-        case "homepage": {
-            $data = $gerecht->selecteerGerecht();
-            $template = 'homepage.html.twig';
-            $title = "homepage";
-            break;
-        }
+switch ($action) {
 
-        case "detail": {
-            $data = $gerecht->selecteerGerecht($gerecht_id);
-            $template = 'detail.html.twig';
-            $title = "detail pagina";
-    
-            break;
+    case "homepage": {
+        $data = $gerecht->selecteerGerecht();
+        $template = 'homepage.html.twig';
+        $title = "homepage";
+        break;
+    }
 
-        }
+    case "detail": {
+        $data = $gerecht->selecteerGerecht($gerecht_id);
+        $template = 'detail.html.twig';
+        $title = "detail pagina";
 
-      case "toggle_favorite": {
-    $gerecht_id = (int)($_GET["gerecht_id"] ?? 0);
+        break;
 
-    $info = new gerecht_info($db->getConnection());
-    $info->toggleFavorite(1, $gerecht_id);
+    }
 
-    header("Location: index.php?action=detail&gerecht_id=".$gerecht_id);
-    exit;
-}
+    case "toggle_favorite": {
 
-        /// etc
+        $favorite=$info->toggleFavorite(1, $gerecht_id);
+        header('Content-Type: application/json');
+
+        echo json_encode([
+            "success" => true,
+            "favorite"=> $favorite
+        ]);
+        exit;
+    }
+
+  
+
+    case "oplijst": {
+        if ($gerecht_id <= 0) {
+        die("Geen geldig gerecht_id ontvangen");
+        // or redirect
+    }
+
+        $success=$boodschappen->boodschappenToevoegen($gerecht_id, 1);
+        $data= $boodschappen->getBoodschappenlijst(1);
+        $template = 'boodschappenlijst.html.twig';
+        $title = "boodschappen lijst";
+        break;
+
+
+    }
+
+    /// etc
 
 }
 
@@ -77,4 +101,4 @@ $template = $twig->load($template);
 
 
 /// En tonen die handel!
-echo $template->render(["title" => $title, "data" => $data]);
+echo $template->render(["title" => $title, "data" => $data,"success"=>$success]);

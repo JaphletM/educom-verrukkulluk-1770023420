@@ -33,14 +33,20 @@
     <p>{{ attribute(data, 'lange omschrijving') }}</p>
 
  
+<a href="index.php?action=oplijst&gerecht_id={{ data.gerecht_id }}" class="smullen-btn"> 
+  <h3 style="color:white"> Op lijst</h3>
+</a>
 
-<a href="index.php?action=toggle_favorite&gerecht_id={{ data.id }}">
 
-<i class="fa fa-heart {% if data.is_favoriet %}fa fa-solid active{% else %}fa fa-regular{% endif %}">
-
+<a href="#"
+   class="js-fav"
+   data-gerecht="{{ data.id }}">
+<i 
+   class="fa fa-heart fa-regular">
 </i>
 </a>
-  </div>
+
+</div>
  
 </div>
 
@@ -113,7 +119,8 @@
 
 </div>
 </div>
- 
+
+
 
 {% endblock %}
 

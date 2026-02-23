@@ -11,6 +11,9 @@ class ingredient{
     }
 
     public function selecteerIngredient($gerecht_id){
+        $gerecht_id = (int)$gerecht_id;
+    if ($gerecht_id <= 0) return [];
+
         $sql ="select * from ingredient where gerecht_id=$gerecht_id";
 
         $return=[];
@@ -28,6 +31,7 @@ class ingredient{
                 "aantal"=>$row["aantal"],
                 "artikel_id"=>$artikel["id"],
                 "naam"=>$artikel["naam"],
+                "omschrijving"=>$artikel["omschrijving"],
                 "prijs"=> $artikel["prijs"],
                 "calorie"=>$artikel["calorie"],
                 "eenheid"=>$artikel["eenheid"],

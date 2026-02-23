@@ -6,11 +6,14 @@ class boodschappen
     private $user;
     private $ingredients;
 
+    private $artikel;
+
     public function __construct($connection)
     {
         $this->connection = $connection;
         $this->user = new user($connection);
         $this->ingredients = new ingredient($connection);
+        $this->artikel=new artikel ($connection);
 
     }
 
@@ -45,8 +48,12 @@ class boodschappen
         }
 
         return true;
-    }
 
+    }
+   public function getBoodschappenLijst($user_id){
+        
+    return $this->ophalenBoodschappen((int)$user_id);
+}
 
 
 
@@ -67,6 +74,7 @@ class boodschappen
 
     private function ophalenBoodschappen($user_id)
     {
+
         $sql = "SELECT * FROM boodschappen_lijst 
             WHERE user_id=$user_id";
 

@@ -45,13 +45,14 @@ public function selecteerInfo($gerecht_id, $record_type){
 public function toggleFavorite($user_id, $gerecht_id){
 
 
-    if($this->determineFavorite($user_id, $gerecht_id)){
+   
         $this->deleteFavorite($user_id, $gerecht_id);
-        return false; 
-    } else {
+     
+  
         $this->addFavorite($user_id, $gerecht_id);
-        return true; 
-    }
+        
+        return true;
+  
 }
 
 public function determineFavorite($user_id, $gerecht_id){
