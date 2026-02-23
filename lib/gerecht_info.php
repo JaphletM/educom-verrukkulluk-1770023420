@@ -43,8 +43,6 @@ public function selecteerInfo($gerecht_id, $record_type){
 }
 
 public function toggleFavorite($user_id, $gerecht_id){
-
-
    
         $this->deleteFavorite($user_id, $gerecht_id);
      

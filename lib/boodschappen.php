@@ -22,7 +22,6 @@ class boodschappen
     {
         $ingredienten = $this->ophalenIngredienten($gerecht_id);
 
-        $return=[];
 
         foreach ($ingredienten as $ingredient) {
             $artikel_id = (int) $ingredient["artikel_id"];

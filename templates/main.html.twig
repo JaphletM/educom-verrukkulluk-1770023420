@@ -29,17 +29,21 @@ $(document).ready(function() {
     icon.toggleClass("fa-regular fa-solid active");
   });
 
-    $(".star").click(function () {
-  const value = Number($(this).data("data-value"));
-
-  $(".star").removeClass("yellow");
-
-  $(".star").each(function () {
-    if (Number($(this).data("data-value")) <= value) {
-      $(this).addClass("yellow");
-    }
-  });
-});
+$(".star").click( function() {
+            const value = $(this).attr('data-value')
+             
+            /// Clear all the red stars 
+            $(".star").removeClass('yellow')
+            
+            /// Paint it Red!
+            $('.star').each( (index, elem) => {
+              const itemValue = $(elem).attr('data-value')
+              if(itemValue <= value) {
+                $(elem).addClass('yellow')
+              }
+            })
+            ///
+          })
 
 });
 

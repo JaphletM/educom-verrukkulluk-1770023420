@@ -23,7 +23,17 @@
       <strong><h3>Keuken: </h3>{{ record.keuken_type }} <h3>Type: </h3>{{ record.gerecht_type }}</strong>
       <em>Door {{ record.usernaam }} ({{ record.datum_toegevoegd }})</em><br>
 
+
       <p>{{ attribute(record, 'korte omschrijving') }}</p>
+      <span class="avg-stars">
+  {% for i in 1..5 %}
+    {% if i <= avg %}
+      ★
+    {% else %}
+      ☆
+    {% endif %}
+  {% endfor %}
+</span>
 
      
 <div class="recipe-footer">
@@ -42,6 +52,8 @@
         <img src="assets/img/istockphoto-993103334-612x612.jpg" width="20">
         4
       </div>
+{% set avg = record.average_rating|default(0)|round %}
+
 
 
     </div>
@@ -49,9 +61,7 @@
     <p>Geen gerechten gevonden.</p>
   {% endfor %}
 
- 
 
-</div>
 
 
 {% endblock %}

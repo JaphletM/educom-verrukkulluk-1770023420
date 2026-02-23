@@ -50,8 +50,8 @@ class gerecht {
                 "totaal prijs"=> $this->calcPrijs($ingredients),
                 "steps" => $this->selectSteps($row["id"]),
                 "ratings" => $this->selectRatings($row["id"]),
+                "average_rating"=>$this->getAverageRating($row["id"]),
                 "comments" => $this->selectRemarks($row["id"]),
-                'is_favoriet'=>$this->infor->determineFavorite(1, $row["id"])
                 
 
             ];
@@ -104,11 +104,22 @@ class gerecht {
 
     }
 
+    private function getAverageRating($gerecht_id){
+    $ratings = $this->selectRatings($gerecht_id);
+
+    $sum = 0;
+    foreach ($ratings as $r){
+        $sum += $r["rating"];
+    }
+
+    return count($ratings) ? round($sum / count($ratings), 1) : 0;
+}
+
     private function selectRatings($gerecht_id){
         $infor=$this->infor->selecteerInfo($gerecht_id,"W");
 
         $ratings=[];
-
+       
         foreach ($infor as $info){
             $user=$this->selecteerUser($info["user_id"]);
                 $ratings[]=[
@@ -118,8 +129,7 @@ class gerecht {
                 ];
         }
 
-    return $ratings;    
-
+    return  $ratings;
     }
 
     private function selectRemarks($gerecht_id){
@@ -166,17 +176,6 @@ class gerecht {
         return $this->keuken->selecteerKeukenType($type_id,$record_type);
     }
 
-   /*  private function determineFavorite($user_id,$gerecht_id){
-        $info=$this->infor->selecteerInfo($gerecht_id,"F");
-
-        foreach ($info as $row){
-            if($row["user_id"]==$user_id){
-                return true;
-            } 
-                
-        }
-        return false;
-    }*/
 
 } 
 

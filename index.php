@@ -83,6 +83,14 @@ switch ($action) {
         break;
     }
 
+    case "rating":{
+        $data=$gerecht->selecteerGerecht($gerecht_id);
+        header('Content-Type: application/json');
+
+    }
+
+
+
     /// etc
 
 }

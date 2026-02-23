@@ -237,15 +237,20 @@ html, body {
 }
 
 .star {
-    font-size: 30px;
+    font-size: 40px!important;
     color: #000;
     cursor: pointer;
     width: 50px;
 }
 
 .star:hover {
-    color: yellow;
+    color: gold;
 }
 .yellow {
-    color: yellow;
+    color: gold;
+}
+
+.avg-stars{
+  color: gold;
+  font-size: 40px;
 }
