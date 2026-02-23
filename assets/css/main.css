@@ -235,3 +235,17 @@ html, body {
   border-radius: 12px;
   margin-top: 20px;
 }
+
+.star {
+    font-size: 30px;
+    color: #000;
+    cursor: pointer;
+    width: 50px;
+}
+
+.star:hover {
+    color: yellow;
+}
+.yellow {
+    color: yellow;
+}

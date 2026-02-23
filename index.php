@@ -76,18 +76,11 @@ switch ($action) {
   
 
     case "oplijst": {
-        if ($gerecht_id <= 0) {
-        die("Geen geldig gerecht_id ontvangen");
-        // or redirect
-    }
-
-        $success=$boodschappen->boodschappenToevoegen($gerecht_id, 1);
-        $data= $boodschappen->getBoodschappenlijst(1);
+        
+        $data= $boodschappen->boodschappenToevoegen($gerecht_id,1);
         $template = 'boodschappenlijst.html.twig';
         $title = "boodschappen lijst";
         break;
-
-
     }
 
     /// etc
@@ -101,4 +94,4 @@ $template = $twig->load($template);
 
 
 /// En tonen die handel!
-echo $template->render(["title" => $title, "data" => $data,"success"=>$success]);
+echo $template->render(["title" => $title, "data" => $data,]);

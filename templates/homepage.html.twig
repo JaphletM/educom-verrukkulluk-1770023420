@@ -20,7 +20,7 @@
       {% endif %}
 
       <h2 style="color:var(--lighter-green)">{{ record.gerecht_titel }}</h2>
-      <strong>{{ record.keuken_type }} • {{ record.gerecht_type }}</strong><br>
+      <strong><h3>Keuken: </h3>{{ record.keuken_type }} <h3>Type: </h3>{{ record.gerecht_type }}</strong>
       <em>Door {{ record.usernaam }} ({{ record.datum_toegevoegd }})</em><br>
 
       <p>{{ attribute(record, 'korte omschrijving') }}</p>

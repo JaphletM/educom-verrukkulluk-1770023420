@@ -22,6 +22,8 @@ class boodschappen
     {
         $ingredienten = $this->ophalenIngredienten($gerecht_id);
 
+        $return=[];
+
         foreach ($ingredienten as $ingredient) {
             $artikel_id = (int) $ingredient["artikel_id"];
             $nodig = (int) $ingredient["aantal"];
@@ -47,13 +49,9 @@ class boodschappen
             }
         }
 
-        return true;
+        return  $this->ophalenBoodschappen((int)$user_id);
 
     }
-   public function getBoodschappenLijst($user_id){
-        
-    return $this->ophalenBoodschappen((int)$user_id);
-}
 
 
 
@@ -72,22 +70,6 @@ class boodschappen
 
     }
 
-    private function ophalenBoodschappen($user_id)
-    {
-
-        $sql = "SELECT * FROM boodschappen_lijst 
-            WHERE user_id=$user_id";
-
-        $return = [];
-
-        $result = mysqli_query($this->connection, $sql);
-        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-
-            $return[] = $row;
-        }
-
-        return $return;
-    }
 
     private function ophalenIngredienten($gerecht_id)
     {
@@ -96,6 +78,28 @@ class boodschappen
 
     }
 
+    private function ophalenBoodschappen($user_id)
+    {
+
+        $sql = "SELECT * FROM boodschappen_lijst 
+            WHERE user_id=$user_id";
+
+       $return = [];
+
+    $result = mysqli_query($this->connection, $sql);
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        $artikel = $this->artikel->selecteerArtikel($row["artikel_id"]);
+        $return[] = [
+            "artikel_id"=>$row["artikel_id"],
+            "aantal"=>$row["aantal"],
+            "aantal_verpakkingen"=>$row["aantal_verpakkingen"],
+            "naam"=>$artikel["naam"],
+            "eenheid"=>$artikel["eenheid"]
+        ];
+    }
+
+        return $return;
+    }
 
     private function artikelToevoegen($artikel_id, $user_id, $aantal, $aantalverpakkingen)
     {

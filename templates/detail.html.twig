@@ -8,7 +8,11 @@
 {% endblock %}
 
 {% block content %}
-
+    <span class="star" data-value="1">*</span>
+     <span class="star" data-value="2">*</span>
+     <span class="star" data-value="3">*</span>
+     <span class="star" data-value="4">*</span>
+     <span class="star" data-value="5">*</span>
 
 <div class="kaart">
 
@@ -27,13 +31,15 @@
 
       <img src="assets/img/istockphoto-993103334-612x612.jpg" width="20">
       4
+
+   
     </div>
 
     <h2 style="color:var(--lighter-green)">{{ data.gerecht_titel }}</h2>
     <p>{{ attribute(data, 'lange omschrijving') }}</p>
 
  
-<a href="index.php?action=oplijst&gerecht_id={{ data.gerecht_id }}" class="smullen-btn"> 
+<a href="index.php?action=oplijst&gerecht_id={{ data.id }}" class="smullen-btn"> 
   <h3 style="color:white"> Op lijst</h3>
 </a>
 
@@ -46,6 +52,8 @@
 </i>
 </a>
 
+   
+   
 </div>
  
 </div>
@@ -119,6 +127,8 @@
 
 </div>
 </div>
+
+
 
 
 

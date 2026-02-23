@@ -9,15 +9,15 @@
 
 
 {% block content %}
-{{ dump(data) }}
     <h1 style="color:var(--lighter-green)">Boodschappenlijst</h1>
     dump
   <ul>
     {% for item in data %}
 
       <li>
-        Artikel: {{ item.artikel_id}} —
+        Artikel: {{ item.naam}} —
         Verpakkingen: {{ item.aantal_verpakkingen }}
+      
       </li>
     {% else %}
       <li>Je boodschappenlijst is leeg.</li>
