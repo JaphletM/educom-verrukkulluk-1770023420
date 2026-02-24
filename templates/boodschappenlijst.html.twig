@@ -22,9 +22,8 @@
   <li>
       Artikel:{{ item.naam }} -
       Aantal: 
-        <form method="POST" action="index.php?action=update_aantal">
-          <input class="js-qty" type="number" name="aantal_verpakkingen" value="{{ item.aantal_verpakkingen }}"> 
-          <input type="hidden" name="artikel_id" value="{{ item.artikel_id }}"> 
+        <form class="js-qty" method="POST" action="index.php?action=update_aantal&artikel_id={{ item.artikel_id }}&aantal_verpakkingen={{ item.aantal_verpakkingen }}">
+          <input  type="number" name="aantal_verpakkingen" data-artikel="{{ item.artikel_id }}" value="{{ item.aantal_verpakkingen }}"> 
         </form>
       Prijs:  €{{ item.prijs / 100 }} -
       Subtotaal:€{{ item_totaal / 100 }}

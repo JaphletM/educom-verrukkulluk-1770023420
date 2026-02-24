@@ -115,24 +115,24 @@ switch ($action) {
     }
 
     case "update_aantal":{
+     
         $artikel_id = $_GET["artikel_id"];
-        $aantal = $_GET["aantal_verpakkingen"]; 
+        $aantal_verpakkingen = $_GET["aantal_verpakkingen"]; 
+        
 
-        $update= $boodschappen->updateAantal($artikel_id,1,$aantal);
+        $update= $boodschappen->updateAantal($artikel_id,1,$aantal_verpakkingen);
 
         header('Content-Type: application/json');
 
-          echo json_encode([
-            "success" => true,
-            "update" => $update
-        ]);
-
-      
-
+           echo json_encode([
+        "success" => $update,
+        "artikel_id" => $artikel_id,
+        "aantal" => $aantal_verpakkingen
+    ]);
+    exit;
     }
 
     /// etc
-
 }
 
 

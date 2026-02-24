@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="css/style.css"/>
+        <script src="js/jquery.js"></script>
+        <script>
+            $(document).ready(function(){
+                $(".star").click(function(){
+                    const value =$(this).attr('data-value')
+
+                    ///clear all red stars 
+                    $(".star").removeClass('red')
+
+                    ///Paint it Red!
+                    $('.star').each((index,elem)=>{
+                        const itemValue=$(elem).attr('data-value')
+                        if(itemValue <= value){
+                            $(elem).addClass('red')
+                        }
+    
+                    })
+                
+
+                    $.ajax({
+                    url:"https://api.dev-master.ninja/js/rating",
+                    method: "POST",
+                    data:{rating:value},
+                    success:function(result){
+                     console.log("Server says",result)
+                     $("#content").html(`Average rating: ${result.result}`)
+
+                    }
+                })
+            })
+        
+        })
+                
+        </script>
+    </head>
+    <body>
+
+        <span class="star" data-value="1">*</span>
+        <span class="star" data-value="2">*</span>
+        <span class="star" data-value="3">*</span>
+        <span class="star" data-value="4">*</span>
+        <span class="star" data-value="5">*</span>
+        <div id="content"></div>
+    </body>
+</html>
