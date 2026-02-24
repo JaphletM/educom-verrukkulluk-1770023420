@@ -54,10 +54,10 @@ class boodschappen
 
     public function deleteItem($user_id, $artikel_id)
     {
-        $sql = "DELETE FROM boodschappen_lijst WHERE user_id=$user_id, artikel_id = $artikel_id";
+        $sql = "DELETE FROM boodschappen_lijst WHERE user_id=$user_id AND artikel_id = $artikel_id";
         $result = mysqli_query($this->connection, $sql);
 
-        return ($result);
+        return ($result)? true : false;
     }
 
 

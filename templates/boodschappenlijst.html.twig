@@ -24,7 +24,7 @@
      Aantal: {{ item.aantal_verpakkingen }} -
      Prijs:  €{{ item.prijs / 100 }} -
      Subtotaal:€{{ item_totaal / 100 }}
-     <i class="fa fa-trash"> </i>
+     <i class="fa fa-trash js-delete" data-artikel="{{item.artikel_id}}"> </i>
   </li>
 
 {% else %}

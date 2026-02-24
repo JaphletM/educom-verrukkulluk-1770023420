@@ -43,7 +43,7 @@ $(".star").click( function() {
               }
             })
             ///
-          })
+          });
 $(".star").click(function (e) {
   e.preventDefault();
 
@@ -57,7 +57,31 @@ $(".star").click(function (e) {
         console.log(result)
     }
   })
+  });
+
+  $(".js-delete").click(function (e) {
+  e.preventDefault();
+
+  const artikel_id = $(this).attr('data-artikel');
+
+  $.ajax({
+    url: 'index.php?gerecht_id={{data.id}}&action=delete',
+    method: 'GET',
+    data: { artikel_id: artikel_id },
+    success: function(result) {
+        console.log(result)
+    }
+  })
+
 });
+ $(".js-delete").click(function (e) {
+  e.preventDefault();
+
+
+
+
+});
+
 });
       
 
