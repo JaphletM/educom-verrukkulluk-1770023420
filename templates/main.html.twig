@@ -59,34 +59,23 @@ $(".star").click(function (e) {
   })
   });
 
-  $(".js-delete").click(function (e) {
-  e.preventDefault();
 
-  const artikel_id = $(this).attr('data-artikel');
+$(".js-qty").change(function(e) {
+    e.preventDefault();
 
-  $.ajax({
-    url: 'index.php?gerecht_id={{data.id}}&action=delete',
-    method: 'GET',
-    data: { artikel_id: artikel_id },
-    success: function(result) {
-        console.log(result)
+
+    $.ajax({
+        url: 'index.php?&action=update_aantal',
+        method: 'POST',
+        data: form.serialize(),
+        success: function (result) {
+        console.log(result);
     }
-  })
+
+    })
+    
 
 });
- $(".js-delete").click(function (e) {
-  e.preventDefault();
-
-
-
-
-});
-
-});
-      
-
-
-
       
 
       

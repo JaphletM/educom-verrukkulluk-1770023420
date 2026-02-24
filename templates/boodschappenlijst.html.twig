@@ -20,11 +20,15 @@
   {% set totaal = totaal + item_totaal %}
 
   <li>
-    Artikel:{{ item.naam }} -
-     Aantal: {{ item.aantal_verpakkingen }} -
-     Prijs:  €{{ item.prijs / 100 }} -
-     Subtotaal:€{{ item_totaal / 100 }}
-     <i class="fa fa-trash js-delete" data-artikel="{{item.artikel_id}}"> </i>
+      Artikel:{{ item.naam }} -
+      Aantal: 
+        <form method="POST" action="index.php?action=update_aantal">
+          <input class="js-qty" type="number" name="aantal_verpakkingen" value="{{ item.aantal_verpakkingen }}"> 
+          <input type="hidden" name="artikel_id" value="{{ item.artikel_id }}"> 
+        </form>
+      Prijs:  €{{ item.prijs / 100 }} -
+      Subtotaal:€{{ item_totaal / 100 }}
+        <a href="index.php?action=delete&artikel_id={{item.artikel_id}}" class="fa fa-trash "></a>
   </li>
 
 {% else %}

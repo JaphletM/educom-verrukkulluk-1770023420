@@ -48,16 +48,33 @@ class boodschappen
             }
         }
 
-        return $this->ophalenBoodschappen((int) $user_id);
+    }
+
+    public function updateAantal ($artikel_id, $user_id, $aantalverpakkingen){ 
+          $sql = "UPDATE boodschappen_lijst 
+            SET aantal_verpakkingen= $aantalverpakkingen
+            WHERE artikel_id = $artikel_id
+            AND user_id = $user_id";
+
+        $result = mysqli_query($this->connection, $sql);
+
+        return $result;
 
     }
+
+    public function getBoodschappenlijst($user_id)
+    {
+
+        return $this->ophalenBoodschappen((int) $user_id);
+    }
+
 
     public function deleteItem($user_id, $artikel_id)
     {
         $sql = "DELETE FROM boodschappen_lijst WHERE user_id=$user_id AND artikel_id = $artikel_id";
         $result = mysqli_query($this->connection, $sql);
 
-        return ($result)? true : false;
+        return ($result);
     }
 
 

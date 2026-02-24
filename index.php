@@ -78,14 +78,20 @@ switch ($action) {
     case "oplijst": {
 
         $data = $boodschappen->boodschappenToevoegen($gerecht_id, 1);
+        header("Location: index.php?action=boodschappenlijst");
+        exit;
+    }
+
+    case "boodschappenlijst": {
+        $data = $boodschappen->getBoodschappenLijst(1);
         $template = 'boodschappenlijst.html.twig';
         $title = "boodschappen lijst";
         break;
     }
 
     case "rating": {
-        
-         $rating = $_GET["rating"];
+
+        $rating = $_GET["rating"];
 
         $waardering = $info->addRating($gerecht_id, $rating);
         header('Content-Type: application/json');
@@ -98,18 +104,31 @@ switch ($action) {
 
     }
 
-    case "delete":{
+    case "delete": {
 
-        $artikel_id=$_GET["artikel_id"];
+        $artikel_id = $_GET["artikel_id"];
 
-        $delete=$boodschappen->deleteItem(1, $artikel_id);
-         header('Content-Type: application/json');
+        $delete = $boodschappen->deleteItem(1, $artikel_id);
 
-        echo json_encode([
+       header("Location: index.php?action=boodschappenlijst");
+    exit;
+    }
+
+    case "update_aantal":{
+        $artikel_id = $_GET["artikel_id"];
+        $aantal = $_GET["aantal_verpakkingen"]; 
+
+        $update= $boodschappen->updateAantal($artikel_id,1,$aantal);
+
+        header('Content-Type: application/json');
+
+          echo json_encode([
             "success" => true,
-            "delete" => $delete
+            "update" => $update
         ]);
-        exit;
+
+      
+
     }
 
     /// etc
