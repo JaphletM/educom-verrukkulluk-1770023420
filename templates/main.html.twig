@@ -44,8 +44,22 @@ $(".star").click( function() {
             })
             ///
           })
+$(".star").click(function (e) {
+  e.preventDefault();
 
+  const rating = $(this).attr('data-value');
+
+  $.ajax({
+    url: 'index.php?gerecht_id={{ data.id }}&action=rating',
+    method: 'GET',
+    data: { rating: rating },
+    success: function(result) {
+        console.log(result)
+    }
+  })
 });
+});
+      
 
 
 

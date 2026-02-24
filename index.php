@@ -63,33 +63,40 @@ switch ($action) {
 
     case "toggle_favorite": {
 
-        $favorite=$info->toggleFavorite(1, $gerecht_id);
+        $favorite = $info->toggleFavorite(1, $gerecht_id);
         header('Content-Type: application/json');
 
         echo json_encode([
             "success" => true,
-            "favorite"=> $favorite
+            "favorite" => $favorite
         ]);
         exit;
     }
 
-  
+
 
     case "oplijst": {
-        
-        $data= $boodschappen->boodschappenToevoegen($gerecht_id,1);
+
+        $data = $boodschappen->boodschappenToevoegen($gerecht_id, 1);
         $template = 'boodschappenlijst.html.twig';
         $title = "boodschappen lijst";
         break;
     }
 
-    case "rating":{
-        $data=$gerecht->selecteerGerecht($gerecht_id);
+    case "rating": {
+        
+         $rating = $_GET["rating"];
+
+        $waardering = $info->addRating($gerecht_id, $rating);
         header('Content-Type: application/json');
 
+        echo json_encode([
+            "success" => true,
+            "waardering" => $waardering
+        ]);
+        exit;
+
     }
-
-
 
     /// etc
 

@@ -1,96 +1,96 @@
 <?php
 
-class gerecht_info{
+class gerecht_info
+{
     private $connection;
     private $user;
-    public function __construct($connection){
-        $this->connection=$connection;
-        $this->user=new user($connection);
+    public function __construct($connection)
+    {
+        $this->connection = $connection;
+        $this->user = new user($connection);
     }
 
-public function selecteerInfo($gerecht_id, $record_type){
-    $sql="SELECT * FROM gerecht_info WHERE gerecht_id=$gerecht_id AND record_type='$record_type'";
+    public function selecteerInfo($gerecht_id, $record_type)
+    {
+        $sql = "SELECT * FROM gerecht_info WHERE gerecht_id=$gerecht_id AND record_type='$record_type'";
 
-    $return=[];
+        $return = [];
 
-    $result=mysqli_query($this->connection,$sql);
-    
-    while ($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+        $result = mysqli_query($this->connection, $sql);
 
-        if($row["record_type"]=="O"||$row["record_type"]=="F" ){
-            $user=$this->selecteerUser($row["user_id"]);
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 
-            $return[]= [
-            "id"=>$row["id"],
-            "record_type"=>($row["record_type"]),
-            "gerecht_id"=>($row["gerecht_id"]),
-            "user_id"=>($user["id"]),
-            "naam"=>($user["naam"]),
-            "email"=>($user["email"]),
-            "wachtwoord"=>($user["wachtwoord"]),
-            "afbeelding"=>($user["afbeelding"]),
-            "datum"=>($row["datum"]),
-            "nummeriekveld"=>($row["nummeriekveld"]),
-            "tekstveld"=>($row["tekstveld"]),
-            
-             ];
-           
-        }else{
-        $return[]= $row;
+            if ($row["record_type"] == "O" || $row["record_type"] == "F") {
+                $user = $this->selecteerUser($row["user_id"]);
+
+                $return[] = [
+                    "id" => $row["id"],
+                    "record_type" => ($row["record_type"]),
+                    "gerecht_id" => ($row["gerecht_id"]),
+                    "user_id" => ($user["id"]),
+                    "naam" => ($user["naam"]),
+                    "email" => ($user["email"]),
+                    "wachtwoord" => ($user["wachtwoord"]),
+                    "afbeelding" => ($user["afbeelding"]),
+                    "datum" => ($row["datum"]),
+                    "nummeriekveld" => ($row["nummeriekveld"]),
+                    "tekstveld" => ($row["tekstveld"]),
+
+                ];
+
+            } else {
+                $return[] = $row;
+            }
+        }
+        return $return;
     }
-}
-    return $return;
-}
 
-public function toggleFavorite($user_id, $gerecht_id){
-   
+    public function toggleFavorite($user_id, $gerecht_id)
+    {
+
         $this->deleteFavorite($user_id, $gerecht_id);
-     
-  
+
+
         $this->addFavorite($user_id, $gerecht_id);
-        
+
         return true;
-  
-}
 
-public function determineFavorite($user_id, $gerecht_id){
- 
-    $sql = "SELECT 1
-            FROM gerecht_info
-            WHERE user_id = $user_id
-              AND gerecht_id = $gerecht_id
-              AND record_type = 'F'
-            LIMIT 1";
+    }
 
-    $result = mysqli_query($this->connection, $sql);
 
-    return ($result && mysqli_num_rows($result) > 0);
-}
+    private function selecteerUser($user_id)
+    {
 
-private function selecteerUser($user_id){
+        return $this->user->selecteerUser($user_id);
+    }
 
-    return $this->user->selecteerUser($user_id);
+   public function addRating($gerecht_id, $rating)
+{
+    $sql = "INSERT INTO gerecht_info (gerecht_id, record_type, nummeriekveld)
+            VALUES ($gerecht_id,'W',$rating)";
+
+    return mysqli_query($this->connection, $sql);
 }
 
 
 
+    private function addFavorite($user_id, $gerecht_id)
+    {
+        $sql = "INSERT INTO gerecht_info (user_id, gerecht_id, record_type) VALUES
+    ('$user_id','$gerecht_id','F')";
 
+        $result = mysqli_query($this->connection, $sql);
 
-private function addFavorite($user_id,$gerecht_id){
-    $sql= "INSERT INTO gerecht_info (user_id, gerecht_id, record_type) VALUES
-    ('$user_id','$gerecht_id','F')"; 
+        return ($result);
+    }
 
-    $result =mysqli_query($this->connection,$sql);
+    private function deleteFavorite($user_id, $gerecht_id)
+    {
+        $sql = "DELETE FROM gerecht_info WHERE user_id=$user_id AND gerecht_id=$gerecht_id AND record_type='F'";
 
-    return($result);
-}
+        $result = mysqli_query($this->connection, $sql);
 
-private function deleteFavorite($user_id,$gerecht_id){
-     $sql= "DELETE FROM gerecht_info WHERE user_id=$user_id AND gerecht_id=$gerecht_id AND record_type='F'";
-
-    $result =mysqli_query($this->connection,$sql);
-    
-    return($result);
+        return ($result);
     }
 }
 

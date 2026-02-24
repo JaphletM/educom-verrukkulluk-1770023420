@@ -52,7 +52,10 @@ class boodschappen
 
     }
 
+    
 
+
+ 
 
     private function ArtikelOpLijst($artikel_id, $user_id)
     {
@@ -93,7 +96,8 @@ class boodschappen
             "aantal"=>$row["aantal"],
             "aantal_verpakkingen"=>$row["aantal_verpakkingen"],
             "naam"=>$artikel["naam"],
-            "eenheid"=>$artikel["eenheid"]
+            "eenheid"=>$artikel["eenheid"],
+            "prijs"=>$artikel["prijs"]
         ];
     }
 

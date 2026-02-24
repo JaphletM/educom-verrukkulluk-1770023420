@@ -121,10 +121,9 @@ class gerecht {
         $ratings=[];
        
         foreach ($infor as $info){
-            $user=$this->selecteerUser($info["user_id"]);
+
                 $ratings[]=[
                     "user_id"=> $info["user_id"],
-                    "usernaam"=>$user["naam"],
                     "rating"=> $info["nummeriekveld"]
                 ];
         }

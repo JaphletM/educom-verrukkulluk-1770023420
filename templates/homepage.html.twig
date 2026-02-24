@@ -25,15 +25,23 @@
 
 
       <p>{{ attribute(record, 'korte omschrijving') }}</p>
-      <span class="avg-stars">
+
+{% set avg = record.average_rating|default(0)|round %}
+
+{{record.average_rating}}
+<span class="avg-stars"> 
   {% for i in 1..5 %}
     {% if i <= avg %}
-      ★
+     <i class="fa fa-star fa-solid"style="color:gold" ></i>
     {% else %}
-      ☆
+    <i class="fa fa-star fa-regular" style="color:white"></i>
     {% endif %}
+  
   {% endfor %}
 </span>
+
+
+
 
      
 <div class="recipe-footer">
@@ -52,7 +60,6 @@
         <img src="assets/img/istockphoto-993103334-612x612.jpg" width="20">
         4
       </div>
-{% set avg = record.average_rating|default(0)|round %}
 
 
 

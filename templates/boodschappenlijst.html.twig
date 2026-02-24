@@ -10,18 +10,28 @@
 
 {% block content %}
     <h1 style="color:var(--lighter-green)">Boodschappenlijst</h1>
-    dump
-  <ul>
-    {% for item in data %}
 
-      <li>
-        Artikel: {{ item.naam}} —
-        Verpakkingen: {{ item.aantal_verpakkingen }}
-      
-      </li>
-    {% else %}
-      <li>Je boodschappenlijst is leeg.</li>
-    {% endfor %}
-  </ul>
+ <ul>
+{% set totaal = 0 %}
+
+{% for item in data %}
+
+  {% set item_totaal = item.prijs * item.aantal_verpakkingen %}
+  {% set totaal = totaal + item_totaal %}
+
+  <li>
+    Artikel: {{ item.naam }} -
+    Aantal: {{ item.aantal_verpakkingen }} -
+    Prijs: €{{ item.prijs / 100 }} -
+    Subtotaal: €{{ item_totaal / 100 }}
+  </li>
+
+{% else %}
+  <li>Je boodschappenlijst is leeg.</li>
+{% endfor %}
+</ul>
+<h3>Totaal: </h3> €{{totaal /100}}
+
+
     
 {% endblock %}
