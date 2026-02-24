@@ -20,10 +20,11 @@
   {% set totaal = totaal + item_totaal %}
 
   <li>
-    Artikel: {{ item.naam }} -
-    Aantal: {{ item.aantal_verpakkingen }} -
-    Prijs: €{{ item.prijs / 100 }} -
-    Subtotaal: €{{ item_totaal / 100 }}
+    Artikel:{{ item.naam }} -
+     Aantal: {{ item.aantal_verpakkingen }} -
+     Prijs:  €{{ item.prijs / 100 }} -
+     Subtotaal:€{{ item_totaal / 100 }}
+     <i class="fa fa-trash"> </i>
   </li>
 
 {% else %}

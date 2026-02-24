@@ -13,7 +13,7 @@ class boodschappen
         $this->connection = $connection;
         $this->user = new user($connection);
         $this->ingredients = new ingredient($connection);
-        $this->artikel=new artikel ($connection);
+        $this->artikel = new artikel($connection);
 
     }
 
@@ -30,7 +30,7 @@ class boodschappen
 
 
             $bestaat = $this->ArtikelOpLijst($artikel_id, $user_id);
-         
+
 
             if ($bestaat != false) {
                 $huidig = (int) $bestaat["aantal"];
@@ -48,14 +48,20 @@ class boodschappen
             }
         }
 
-        return  $this->ophalenBoodschappen((int)$user_id);
+        return $this->ophalenBoodschappen((int) $user_id);
 
     }
 
-    
+    public function deleteItem($user_id, $artikel_id)
+    {
+        $sql = "DELETE FROM boodschappen_lijst WHERE user_id=$user_id, artikel_id = $artikel_id";
+        $result = mysqli_query($this->connection, $sql);
+
+        return ($result);
+    }
 
 
- 
+
 
     private function ArtikelOpLijst($artikel_id, $user_id)
     {
@@ -86,20 +92,20 @@ class boodschappen
         $sql = "SELECT * FROM boodschappen_lijst 
             WHERE user_id=$user_id";
 
-       $return = [];
+        $return = [];
 
-    $result = mysqli_query($this->connection, $sql);
-    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-        $artikel = $this->artikel->selecteerArtikel($row["artikel_id"]);
-        $return[] = [
-            "artikel_id"=>$row["artikel_id"],
-            "aantal"=>$row["aantal"],
-            "aantal_verpakkingen"=>$row["aantal_verpakkingen"],
-            "naam"=>$artikel["naam"],
-            "eenheid"=>$artikel["eenheid"],
-            "prijs"=>$artikel["prijs"]
-        ];
-    }
+        $result = mysqli_query($this->connection, $sql);
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $artikel = $this->artikel->selecteerArtikel($row["artikel_id"]);
+            $return[] = [
+                "artikel_id" => $row["artikel_id"],
+                "aantal" => $row["aantal"],
+                "aantal_verpakkingen" => $row["aantal_verpakkingen"],
+                "naam" => $artikel["naam"],
+                "eenheid" => $artikel["eenheid"],
+                "prijs" => $artikel["prijs"]
+            ];
+        }
 
         return $return;
     }

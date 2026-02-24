@@ -98,6 +98,20 @@ switch ($action) {
 
     }
 
+    case "delete":{
+
+        $artikel_id=$_GET["artikel_id"];
+
+        $delete=$boodschappen->deleteItem(1, $artikel_id);
+         header('Content-Type: application/json');
+
+        echo json_encode([
+            "success" => true,
+            "delete" => $delete
+        ]);
+        exit;
+    }
+
     /// etc
 
 }
