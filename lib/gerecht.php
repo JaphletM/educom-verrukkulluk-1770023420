@@ -63,6 +63,41 @@ class gerecht {
         return $return;
     }
 
+
+public function searchGerechten(string $question): array
+{
+    $question = trim($question);
+
+    if ($question === "") {
+        return $this->selecteerGerecht();
+    }
+
+    $questionEsc = mysqli_real_escape_string($this->connection, $question);
+
+    $sql = "
+        SELECT *
+        FROM gerecht
+        WHERE titel LIKE '%$questionEsc%'
+           OR korte_omschrijving LIKE '%$questionEsc%'
+           OR lange_omschrijving LIKE '%$questionEsc%'
+           OR datum_toegevoegd LIKE '%$questionEsc%'
+        ORDER BY titel
+    ";
+
+    $result = mysqli_query($this->connection, $sql);
+
+    if (!$result) {
+        return [];
+    }
+
+    $return = [];
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        $return[] = $row;
+    }
+
+    return $return; 
+}
+
     private function selecteerUser($user_id){
 
         return $this->user->selecteerUser($user_id);

@@ -50,8 +50,11 @@ class boodschappen
 
     }
 
-    public function updateAantal ($artikel_id, $user_id, $aantalverpakkingen){ 
-          $sql = "UPDATE boodschappen_lijst 
+
+
+    public function updateAantal($artikel_id, $user_id, $aantalverpakkingen)
+    {
+        $sql = "UPDATE boodschappen_lijst 
             SET aantal_verpakkingen= $aantalverpakkingen
             WHERE artikel_id = $artikel_id
             AND user_id = $user_id";

@@ -262,3 +262,7 @@ html, body {
 .fa-solid.fa-star {
   color: gold;
 }
+
+a{
+    text-decoration: none;
+}

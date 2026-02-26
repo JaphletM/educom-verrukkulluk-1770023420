@@ -110,26 +110,36 @@ switch ($action) {
 
         $delete = $boodschappen->deleteItem(1, $artikel_id);
 
-       header("Location: index.php?action=boodschappenlijst");
-    exit;
+        header("Location: index.php?action=boodschappenlijst");
+        exit;
     }
 
-    case "update_aantal":{
-     
-        $artikel_id = $_GET["artikel_id"];
-        $aantal_verpakkingen = $_GET["aantal_verpakkingen"]; 
-        
+    case "update_aantal": {
 
-        $update= $boodschappen->updateAantal($artikel_id,1,$aantal_verpakkingen);
+        $artikel_id = $_GET["artikel_id"];
+        $aantal_verpakkingen = $_GET["aantal_verpakkingen"];
+
+
+        $update = $boodschappen->updateAantal($artikel_id, 1, $aantal_verpakkingen);
 
         header('Content-Type: application/json');
 
-           echo json_encode([
-        "success" => $update,
-        "artikel_id" => $artikel_id,
-        "aantal" => $aantal_verpakkingen
-    ]);
-    exit;
+        echo json_encode([
+            "success" => $update,
+            "artikel_id" => $artikel_id,
+            "aantal" => $aantal_verpakkingen
+        ]);
+        exit;
+    }
+
+    case "search": {
+        $question = isset($_GET["question"]) ? $_GET["question"] : "";
+
+        $data = $gerecht->searchGerechten($question);
+
+        $template = "search.html.twig";
+        $title = "Zoeken";
+        break;
     }
 
     /// etc
@@ -142,4 +152,4 @@ $template = $twig->load($template);
 
 
 /// En tonen die handel!
-echo $template->render(["title" => $title, "data" => $data,]);
+echo $template->render(["title" => $title, "data" => $data, "question" => $question ?? ""]);

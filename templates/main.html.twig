@@ -9,9 +9,6 @@
     <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css" />
 
 
-   
-
-
     <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
      <script type="text/javascript" language="javascript" src="assets/jquery/jquery-3.5.1.js"></script>
     <script type="text/javascript" language="javascript" src="assets/bootstrap/js/bootstrap.js"></script>
@@ -60,37 +57,58 @@ $(".star").click(function (e) {
   });
 
 
-$(".js-qty").change(function(){
-    console.log("CHANGE FIRED");
-    console.log("aantal:", $(this).val());
-    console.log("artikel:", $(this).data("artikel"));
+
+$(document).on("input", ".js-qty", function () {
+
+  let totaal = 0;
+
+  $(".js-qty").each(function () {
+    const prijs = parseInt($(this).data("prijs")) || 0; // cents
+    const qty   = parseInt($(this).val()) || 0;
+
+
+    const itemTotaal = prijs * qty;
+    
+
+    $(this)
+      .closest("li")
+      .find(".js-item-total")
+      .text("€" + (itemTotaal / 100).toFixed(2));
+
+    totaal += itemTotaal;
+  });
+  console.log("totaal",totaal);
+
+  $(".js-list-total").text("€" + (totaal / 100).toFixed(2));
+
+
+  const aantal = parseInt($(this).val()) || 0;
+  const artikelId = $(this).data("artikel");
+
+  $.ajax({
+    url: "index.php?action=update_aantal",
+    method: "GET",
+    data: { aantal_verpakkingen: aantal, artikel_id: artikelId },
+    success: function (result) {
+      console.log("saved:", result);
+    }
+  });
+  });
+
 });
-
-    const aantal= $(this).val();
-    const artikelId=$(this).attr('data-artikel');
-
-      console.log("sending", aantal, artikelId);
-
-    $.ajax({
-        url:'index.php?action=update_aantal}',
-        method: 'GET',
-        data: {aantal_verpakkingen: aantal, artikel_id: artikelId},
-        success: function(result){
-            console.log(result)
-        }
-        });
-      
-    });
-
-      
       
 </script>
 </head>
 
 
 <body>
-<div class="container-fluid">
 
+ <div class="container-fluid">
+  <form action="index.php" method="GET">
+  <input type="hidden" name="action" value="search">
+  <input type="text" name="question" placeholder="Zoek gerechten...">
+  <button type="submit">Zoek</button>
+</form>
     <div class="row">
         <div class="col-md-12">
         {% block header %}

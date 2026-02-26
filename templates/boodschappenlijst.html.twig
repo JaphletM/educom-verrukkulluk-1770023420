@@ -3,7 +3,9 @@
 {% block header %}
   <div class="hero-header">
     <img src="assets/img/healthy-bowl-frische.jpg" class="hero-bg" alt="">
-    <img src="assets/img/logo-v2.png" class="hero-logo" alt="Logo">
+     <a href="index.php?action=homepage">
+         <img src="assets/img/logo-v2.png" class="hero-logo" alt="Logo">
+    </a>
   </div>
 {% endblock %}
 
@@ -18,15 +20,16 @@
 
   {% set item_totaal = item.prijs * item.aantal_verpakkingen %}
   {% set totaal = totaal + item_totaal %}
+ 
 
   <li>
       Artikel:{{ item.naam }} -
       Aantal: 
-        <form class="js-qty" method="POST" action="index.php?action=update_aantal&artikel_id={{ item.artikel_id }}&aantal_verpakkingen={{ item.aantal_verpakkingen }}">
-          <input  type="number" name="aantal_verpakkingen" data-artikel="{{ item.artikel_id }}" value="{{ item.aantal_verpakkingen }}"> 
-        </form>
-      Prijs:  €{{ item.prijs / 100 }} -
-      Subtotaal:€{{ item_totaal / 100 }}
+   
+          <input  class="js-qty" type="number" name="aantal_verpakkingen" data-prijs="{{item.prijs}}" data-artikel="{{ item.artikel_id }}" value="{{ item.aantal_verpakkingen }}"> 
+
+      Prijs: €{{ item.prijs / 100 }} -
+      Subtotaal:<span class="js-item-total" data-value="{{item_totaal}}"> €{{ item_totaal / 100 }}</span> 
         <a href="index.php?action=delete&artikel_id={{item.artikel_id}}" class="fa fa-trash "></a>
   </li>
 
@@ -34,7 +37,7 @@
   <li>Je boodschappenlijst is leeg.</li>
 {% endfor %}
 </ul>
-<h3>Totaal: </h3> €{{totaal /100}}
+<h3>Totaal: </h3> <span class="js-list-total" data-value="{{totaal}}">€{{totaal /100}} </span>
 
 
     
