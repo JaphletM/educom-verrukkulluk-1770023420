@@ -102,6 +102,16 @@ $(document).on("input", ".js-qty", function () {
 
 
 <body>
+<div class="menu">
+  <div class="menu-trigger">
+    <div class="dropdown">
+     <h1> Mijn Favorieten</h1> 
+     <a style="text-decoration:none"href="index.php?action=boodschappenlijst"><h1>Mijn Boodschappenlijst</h1></a>
+    </div>
+  </div>
+</div>
+
+
 
  <div class="container-fluid">
   <form action="index.php" method="GET">
@@ -109,12 +119,15 @@ $(document).on("input", ".js-qty", function () {
   <input type="text" name="question" placeholder="Zoek gerechten...">
   <button type="submit">Zoek</button>
 </form>
+
+
     <div class="row">
         <div class="col-md-12">
         {% block header %}
+    
             
         {% endblock %}   
-        </div>
+        
     </div>
 
  
@@ -152,7 +165,11 @@ $(document).on("input", ".js-qty", function () {
                  Een workshop vegetarisch koken.
                 </div>
             </div>
+          
+     
+
 </div>
+ 
             
       <div class="login-card mt-3">
       <img src="assets/img/verrukkulluk-login.png" class="main-img" width="200">

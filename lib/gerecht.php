@@ -68,10 +68,6 @@ public function searchGerechten(string $question): array
 {
     $question = trim($question);
 
-    if ($question === "") {
-        return $this->selecteerGerecht();
-    }
-
     $questionEsc = mysqli_real_escape_string($this->connection, $question);
 
     $sql = "
@@ -81,8 +77,19 @@ public function searchGerechten(string $question): array
            OR korte_omschrijving LIKE '%$questionEsc%'
            OR lange_omschrijving LIKE '%$questionEsc%'
            OR datum_toegevoegd LIKE '%$questionEsc%'
-        ORDER BY titel
-    ";
+       OR id IN (
+            SELECT i.gerecht_id
+            FROM ingredient i
+            WHERE i.artikel_id IN (
+                SELECT a.id
+                FROM artikel a
+                WHERE a.naam LIKE '%$questionEsc%'
+                   OR a.omschrijving LIKE '%$questionEsc%'
+            )
+       )
+    ORDER BY titel
+";
+
 
     $result = mysqli_query($this->connection, $sql);
 

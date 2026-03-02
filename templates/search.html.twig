@@ -13,18 +13,21 @@
 {% block content %}
     <h1 style="color:var(--lighter-green)">Alle recepten:</h1>
 
-<div class="kaart">
-{% for item in data %}
 
+{% for item in data %}
+<div class="kaart">
  <a href="index.php?action=detail&gerecht_id={{ item.id }}"> <h2>{{item.titel}}</h2></a><br>
+
 
 {{item.korte_omschrijving}}<br>
 {{item.datum_toegevoegd}}<br>
-</div>
+ </div>
+
 {% else %}
       <p class="text-muted">
         Geen recepten gevonden voor "<strong>{{ question }}</strong>".
       </p>
+   
 
 {% endfor %}
 

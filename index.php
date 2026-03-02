@@ -135,7 +135,9 @@ switch ($action) {
     case "search": {
         $question = isset($_GET["question"]) ? $_GET["question"] : "";
 
+
         $data = $gerecht->searchGerechten($question);
+
 
         $template = "search.html.twig";
         $title = "Zoeken";
